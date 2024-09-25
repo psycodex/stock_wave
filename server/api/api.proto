@@ -1,0 +1,22 @@
+/**
+ * Api Messages
+ */
+syntax = "proto3";
+
+package api;
+
+//import "google/protobuf/any.proto";
+//import "google/protobuf/timestamp.proto";
+
+message Envelope {
+  oneof message {
+    UpdateEodDataRequest update_eod_request = 1;
+  }
+}
+message UpdateEodDataRequest {
+  string message = 1;
+}
+
+message UpdateEodDataReply {
+  string message = 1;
+}
