@@ -11,6 +11,11 @@ version: ; $(info VERSION="$(VERSION)")
 prepare:
 	./prepare-sources.sh --proto ./server/api/service.proto --flutterDir ./ --pythonDir ./server
 
+.PHONY: bundle
+# bundle
+bundle:
+	./bundle-python.sh --flutterDir ./ --pythonDir ./server
+
 .PHONY: build
 # builds python first and then electron app with python embedded
 build:
@@ -27,10 +32,14 @@ buildpy:
 .PHONY: api
 # generate api proto
 api:
+	#cd server && protoc -I=. \
+#	        --proto_path=./third_party \
+#            --python_out=. \
+#            $(API_PROTO_FILES)
 	cd server && protoc -I=. \
-	        --proto_path=./third_party \
-            --python_out=. \
-            $(API_PROTO_FILES)
+			--python_out=. \
+			--grpc_python_out=. \
+			$(API_PROTO_FILES)
 	make apic
 
 .PHONY: apic
@@ -38,9 +47,8 @@ api:
 apic:
 	cd server && protoc -I=. \
 	        --proto_path=./third_party \
-	        --ts_proto_out=import_style=commonjs,binary:. \
+	        --dart_out=../lib \
             $(API_PROTO_FILES)
-	mv server/api/*.ts renderer/src/api
 
 # show help
 help:

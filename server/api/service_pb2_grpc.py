@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import service_pb2 as service__pb2
+from api import service_pb2 as api_dot_service__pb2
 
 GRPC_GENERATED_VERSION = '1.66.1'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in service_pb2_grpc.py depends on'
+        + f' but the generated code in api/service_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,8 +36,8 @@ class NumberSortingServiceStub(object):
         """
         self.SortNumbers = channel.unary_unary(
                 '/NumberSortingService/SortNumbers',
-                request_serializer=service__pb2.NumberArray.SerializeToString,
-                response_deserializer=service__pb2.NumberArray.FromString,
+                request_serializer=api_dot_service__pb2.NumberArray.SerializeToString,
+                response_deserializer=api_dot_service__pb2.NumberArray.FromString,
                 _registered_method=True)
 
 
@@ -55,8 +55,8 @@ def add_NumberSortingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SortNumbers': grpc.unary_unary_rpc_method_handler(
                     servicer.SortNumbers,
-                    request_deserializer=service__pb2.NumberArray.FromString,
-                    response_serializer=service__pb2.NumberArray.SerializeToString,
+                    request_deserializer=api_dot_service__pb2.NumberArray.FromString,
+                    response_serializer=api_dot_service__pb2.NumberArray.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -84,8 +84,8 @@ class NumberSortingService(object):
             request,
             target,
             '/NumberSortingService/SortNumbers',
-            service__pb2.NumberArray.SerializeToString,
-            service__pb2.NumberArray.FromString,
+            api_dot_service__pb2.NumberArray.SerializeToString,
+            api_dot_service__pb2.NumberArray.FromString,
             options,
             channel_credentials,
             insecure,
