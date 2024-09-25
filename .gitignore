@@ -57,3 +57,5 @@ app.*.map.json
 buildpy/
 
 .venv/
+
+server_py_flutter_osx

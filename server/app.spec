@@ -5,7 +5,7 @@ ta_lib_libs = [
     ('/opt/homebrew/Cellar/ta-lib/0.4.0/lib/libta_lib.dylib', 'libta_lib.dylib'),
 ]
 a = Analysis(
-    ['app.py'],
+    ['server.py'],
     pathex=[
         'server'
     ],

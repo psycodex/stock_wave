@@ -25,7 +25,7 @@ set defaultHost(String value) {
 }
 
 /// Lazily creates client channel, for each host/port pair there's one channel created and stored internally.
-/// You can use this channel to instatiate specigic client, i.e. `MyCleint(getClientChannel())`
+/// You can use this channel to instatiate specigic client, i.e. `MyClient(getClientChannel())`
 /// Parameters:
 /// - `host`: The host address. Default value is [defaultHost].
 /// - `port`: The port number. If not provided, the [defaultPort] value will be used.

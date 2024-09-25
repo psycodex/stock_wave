@@ -1,10 +1,27 @@
+OSTYPE := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 API_PROTO_FILES=$(shell cd server && find api -name *.proto)
 VERSION=$(shell git describe --tags --always)
 PROTO_DIR=./server/api
 
+ifeq ($(OSTYPE), msys)
+    exeNameFull := $(exeName)_win
+else ifeq ($(OSTYPE), win32)
+    exeNameFull := $(exeName)_win
+else ifeq ($(OSTYPE), darwin)
+    exeNameFull := $(exeName)_osx
+else
+    exeNameFull := $(exeName)_lnx
+endif
+
 .PHONY: version
 #  version
 version: ; $(info VERSION="$(VERSION)")
+
+.PHONY: init
+# init env
+init:
+	python -m venv .venv && source .venv/bin/activate
+	poetry install --no-root
 
 .PHONY: prepare
 # prepare
@@ -27,23 +44,20 @@ build:
 # builds python
 buildpy:
 	rm -rf buildpy/
-	pyinstaller server/app.spec --distpath buildpy --noconfirm # --onefile
+	pyinstaller server/app.spec --distpath buildpy --noconfirm
 
 .PHONY: api
 # generate api proto
 api:
-	#cd server && protoc -I=. \
-#	        --proto_path=./third_party \
-#            --python_out=. \
-#            $(API_PROTO_FILES)
-	cd server && protoc -I=. \
+	cd server && python -m grpc_tools.protoc -I. \
+	        --proto_path=./third_party \
 			--python_out=. \
 			--grpc_python_out=. \
 			$(API_PROTO_FILES)
 	make apic
 
 .PHONY: apic
-# generate api client proto   --ts_proto_out
+# generate api client proto
 apic:
 	cd server && protoc -I=. \
 	        --proto_path=./third_party \

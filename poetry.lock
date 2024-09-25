@@ -417,6 +417,21 @@ files = [
 protobuf = ["grpcio-tools (>=1.66.1)"]
 
 [[package]]
+name = "grpcio-health-checking"
+version = "1.66.1"
+description = "Standard Health Checking Service for gRPC"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "grpcio_health_checking-1.66.1-py3-none-any.whl", hash = "sha256:a606e7178328870c2265b81000cef963145a6fca38a7f6b473fb12c5d9f63236"},
+    {file = "grpcio_health_checking-1.66.1.tar.gz", hash = "sha256:1b5817ebbdf83c9e297a8dc565d96bceff972b7ca15f74c0efd03b206ef82ae2"},
+]
+
+[package.dependencies]
+grpcio = ">=1.66.1"
+protobuf = ">=5.26.1,<6.0dev"
+
+[[package]]
 name = "grpcio-tools"
 version = "1.66.1"
 description = "Protobuf code generator for gRPC"
@@ -1482,4 +1497,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.14"
-content-hash = "413d00785983e56737dffb3d805ba47726db6433086240e432937dd931c628e2"
+content-hash = "0552ce6bc020ca2c233561d2f5e6830d2fee7ba0c9c53b78355f7102baea0064"

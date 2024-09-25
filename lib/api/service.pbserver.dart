@@ -15,7 +15,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'service.pb.dart' as $0;
+import 'api.pb.dart' as $0;
 import 'service.pbjson.dart';
 
 export 'service.pb.dart';

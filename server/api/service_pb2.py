@@ -22,17 +22,16 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from api import api_pb2 as api_dot_api__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\"\x1e\n\x0bNumberArray\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x32\x43\n\x14NumberSortingService\x12+\n\x0bSortNumbers\x12\x0c.NumberArray\x1a\x0c.NumberArray\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\x12\x03\x61pi\x1a\rapi/api.proto2K\n\x14NumberSortingService\x12\x33\n\x0bSortNumbers\x12\x10.api.NumberArray\x1a\x10.api.NumberArray\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'api.service_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_NUMBERARRAY']._serialized_start=21
-  _globals['_NUMBERARRAY']._serialized_end=51
-  _globals['_NUMBERSORTINGSERVICE']._serialized_start=53
-  _globals['_NUMBERSORTINGSERVICE']._serialized_end=120
+  _globals['_NUMBERSORTINGSERVICE']._serialized_start=41
+  _globals['_NUMBERSORTINGSERVICE']._serialized_end=116
 # @@protoc_insertion_point(module_scope)

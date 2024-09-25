@@ -53,3 +53,15 @@ const UpdateEodDataReply$json = {
 final $typed_data.Uint8List updateEodDataReplyDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVFb2REYXRhUmVwbHkSGAoHbWVzc2FnZRgBIAEoCVIHbWVzc2FnZQ==');
 
+@$core.Deprecated('Use numberArrayDescriptor instead')
+const NumberArray$json = {
+  '1': 'NumberArray',
+  '2': [
+    {'1': 'numbers', '3': 1, '4': 3, '5': 5, '10': 'numbers'},
+  ],
+};
+
+/// Descriptor for `NumberArray`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List numberArrayDescriptor = $convert.base64Decode(
+    'CgtOdW1iZXJBcnJheRIYCgdudW1iZXJzGAEgAygFUgdudW1iZXJz');
+

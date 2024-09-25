@@ -53,8 +53,6 @@ else
     exeNameFull="${exeName}_lnx"
 fi
 
-$PYTHON -m pip install -r $pythonDir/requirements.txt
-
 cd $pythonDir
 if [[ $nuitka == true ]]; then
     export PYTHONPATH="./grpc_generated"

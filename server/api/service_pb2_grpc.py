@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from api import service_pb2 as api_dot_service__pb2
+from api import api_pb2 as api_dot_api__pb2
 
 GRPC_GENERATED_VERSION = '1.66.1'
 GRPC_VERSION = grpc.__version__
@@ -35,9 +35,9 @@ class NumberSortingServiceStub(object):
             channel: A grpc.Channel.
         """
         self.SortNumbers = channel.unary_unary(
-                '/NumberSortingService/SortNumbers',
-                request_serializer=api_dot_service__pb2.NumberArray.SerializeToString,
-                response_deserializer=api_dot_service__pb2.NumberArray.FromString,
+                '/api.NumberSortingService/SortNumbers',
+                request_serializer=api_dot_api__pb2.NumberArray.SerializeToString,
+                response_deserializer=api_dot_api__pb2.NumberArray.FromString,
                 _registered_method=True)
 
 
@@ -55,14 +55,14 @@ def add_NumberSortingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SortNumbers': grpc.unary_unary_rpc_method_handler(
                     servicer.SortNumbers,
-                    request_deserializer=api_dot_service__pb2.NumberArray.FromString,
-                    response_serializer=api_dot_service__pb2.NumberArray.SerializeToString,
+                    request_deserializer=api_dot_api__pb2.NumberArray.FromString,
+                    response_serializer=api_dot_api__pb2.NumberArray.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'NumberSortingService', rpc_method_handlers)
+            'api.NumberSortingService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('NumberSortingService', rpc_method_handlers)
+    server.add_registered_method_handlers('api.NumberSortingService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -83,9 +83,9 @@ class NumberSortingService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/NumberSortingService/SortNumbers',
-            api_dot_service__pb2.NumberArray.SerializeToString,
-            api_dot_service__pb2.NumberArray.FromString,
+            '/api.NumberSortingService/SortNumbers',
+            api_dot_api__pb2.NumberArray.SerializeToString,
+            api_dot_api__pb2.NumberArray.FromString,
             options,
             channel_credentials,
             insecure,

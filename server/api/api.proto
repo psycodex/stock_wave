@@ -20,3 +20,7 @@ message UpdateEodDataRequest {
 message UpdateEodDataReply {
   string message = 1;
 }
+
+message NumberArray {
+  repeated int32 numbers = 1;
+}

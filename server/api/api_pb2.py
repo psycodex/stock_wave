@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rapi/api.proto\x12\x03\x61pi\"N\n\x08\x45nvelope\x12\x37\n\x12update_eod_request\x18\x01 \x01(\x0b\x32\x19.api.UpdateEodDataRequestH\x00\x42\t\n\x07message\"\'\n\x14UpdateEodDataRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"%\n\x12UpdateEodDataReply\x12\x0f\n\x07message\x18\x01 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rapi/api.proto\x12\x03\x61pi\"N\n\x08\x45nvelope\x12\x37\n\x12update_eod_request\x18\x01 \x01(\x0b\x32\x19.api.UpdateEodDataRequestH\x00\x42\t\n\x07message\"\'\n\x14UpdateEodDataRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"%\n\x12UpdateEodDataReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1e\n\x0bNumberArray\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -37,4 +37,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_UPDATEEODDATAREQUEST']._serialized_end=141
   _globals['_UPDATEEODDATAREPLY']._serialized_start=143
   _globals['_UPDATEEODDATAREPLY']._serialized_end=180
+  _globals['_NUMBERARRAY']._serialized_start=182
+  _globals['_NUMBERARRAY']._serialized_end=212
 # @@protoc_insertion_point(module_scope)

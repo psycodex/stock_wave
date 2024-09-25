@@ -13,32 +13,22 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use numberArrayDescriptor instead')
-const NumberArray$json = {
-  '1': 'NumberArray',
-  '2': [
-    {'1': 'numbers', '3': 1, '4': 3, '5': 5, '10': 'numbers'},
-  ],
-};
-
-/// Descriptor for `NumberArray`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List numberArrayDescriptor = $convert.base64Decode(
-    'CgtOdW1iZXJBcnJheRIYCgdudW1iZXJzGAEgAygFUgdudW1iZXJz');
+import 'api.pbjson.dart' as $0;
 
 const $core.Map<$core.String, $core.dynamic> NumberSortingServiceBase$json = {
   '1': 'NumberSortingService',
   '2': [
-    {'1': 'SortNumbers', '2': '.NumberArray', '3': '.NumberArray', '4': {}},
+    {'1': 'SortNumbers', '2': '.api.NumberArray', '3': '.api.NumberArray', '4': {}},
   ],
 };
 
 @$core.Deprecated('Use numberSortingServiceDescriptor instead')
 const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> NumberSortingServiceBase$messageJson = {
-  '.NumberArray': NumberArray$json,
+  '.api.NumberArray': $0.NumberArray$json,
 };
 
 /// Descriptor for `NumberSortingService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
 final $typed_data.Uint8List numberSortingServiceDescriptor = $convert.base64Decode(
-    'ChROdW1iZXJTb3J0aW5nU2VydmljZRIrCgtTb3J0TnVtYmVycxIMLk51bWJlckFycmF5GgwuTn'
-    'VtYmVyQXJyYXkiAA==');
+    'ChROdW1iZXJTb3J0aW5nU2VydmljZRIzCgtTb3J0TnVtYmVycxIQLmFwaS5OdW1iZXJBcnJheR'
+    'oQLmFwaS5OdW1iZXJBcnJheSIA');
 

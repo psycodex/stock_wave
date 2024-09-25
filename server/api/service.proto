@@ -1,9 +1,9 @@
 syntax = "proto3";
 
+package api;
+
+import "api/api.proto";
+
 service NumberSortingService {
   rpc SortNumbers (NumberArray) returns (NumberArray) {}
-}
-
-message NumberArray {
-  repeated int32 numbers = 1;
 }

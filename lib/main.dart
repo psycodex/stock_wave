@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'grpc_generated/client.dart';
+import 'grpc_generated/health.pbgrpc.dart';
+import 'grpc_generated/init_py.dart';
+
+Future<void> pyInitResult = Future(() => null);
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  pyInitResult = initPy();
   runApp(const MyApp());
 }
 
@@ -57,7 +65,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  Future<void> _incrementCounter() async {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -66,6 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+
+    var client = HealthClient(getClientChannel());
+    var request = HealthCheckRequest();
+    var started = false;
+
+    try {
+      var r = await client.check(request);
+
+      if (r.status == HealthCheckResponse_ServingStatus.SERVING) {
+        print("working $r");
+      }
+    } catch (e) {
+      print("$e");
+    }
   }
 
   @override
