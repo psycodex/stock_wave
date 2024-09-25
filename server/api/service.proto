@@ -4,6 +4,6 @@ package api;
 
 import "api/api.proto";
 
-service NumberSortingService {
+service StockWaveService {
   rpc SortNumbers (NumberArray) returns (NumberArray) {}
 }

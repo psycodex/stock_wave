@@ -1,6 +1,6 @@
 import 'package:grpc/grpc_connection_interface.dart';
 // Conditional imports to enable single gRPC client creation for native and Web platfrom
-import 'client_native.dart'
+import '../client/client_native.dart'
     if (dart.library.io) 'client_native.dart'
     if (dart.library.html) 'client_web.dart';
 

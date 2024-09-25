@@ -23,6 +23,16 @@ init:
 	python -m venv .venv && source .venv/bin/activate
 	poetry install --no-root
 
+.PHONY: run
+# runs build_runner
+run:
+	dart run build_runner build --delete-conflicting-outputs
+
+.PHONY: pod
+# pod update
+pod:
+	cd macos && pod repo update && pod install --repo-update
+
 .PHONY: prepare
 # prepare
 prepare:

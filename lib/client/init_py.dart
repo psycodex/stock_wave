@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'client.dart';
-import 'health.pbgrpc.dart';
+import '../api/health.pbgrpc.dart';
 import 'init_py_native.dart'
     if (dart.library.io) 'init_py_native.dart'
     if (dart.library.html) 'init_py_web.dart';
