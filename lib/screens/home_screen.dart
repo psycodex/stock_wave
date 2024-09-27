@@ -49,29 +49,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.green,
                     child: MainContentArea(
                       sidebar: SideBar(
-                        minWidth: 0,
+                        defaultWidth: 200,
                         maxWidth: double.infinity,
                         child: Container(
                           color: Colors.blue,
-                          child: Center(
+                          child: const Center(
                             child: Text('Left Sidebar'),
+                          ),
+                        ),
+                      ),
+                      endSidebar: SideBar(
+                        defaultWidth: 200,
+                        maxWidth: double.infinity,
+                        child: Container(
+                          color: Colors.red,
+                          child: const Center(
+                            child: Text('End Sidebar'),
                           ),
                         ),
                       ),
                       child: Container(
                         color: Colors.white,
-                        child: Center(
+                        child: const Center(
                           child: Text('Main Content Area1'),
-                        ),
-                      ),
-                      endSidebar: SideBar(
-                        minWidth: 0,
-                        maxWidth: double.infinity,
-                        child: Container(
-                          color: Colors.red,
-                          child: Center(
-                            child: Text('End Sidebar'),
-                          ),
                         ),
                       ),
                     ),

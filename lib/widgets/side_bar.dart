@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class SideBar extends StatefulWidget {
   final double? startWidth;
   final Widget child;
-  final double minWidth;
+  final double defaultWidth;
   final double? maxWidth;
 
   final bool? isResizable;
@@ -11,7 +11,7 @@ class SideBar extends StatefulWidget {
   const SideBar({
     super.key,
     required this.child,
-    required this.minWidth,
+    required this.defaultWidth,
     this.startWidth,
     this.maxWidth,
     this.isResizable = true,

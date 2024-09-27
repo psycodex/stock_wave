@@ -33,10 +33,11 @@ class _MainContentAreaState extends State<MainContentArea> {
   @override
   void initState() {
     super.initState();
-    _sidebarWidth = (widget.sidebar?.startWidth ?? widget.sidebar?.minWidth) ??
-        _sidebarWidth;
+    _sidebarWidth =
+        (widget.sidebar?.startWidth ?? widget.sidebar?.defaultWidth) ??
+            _sidebarWidth;
     _endSidebarWidth =
-        (widget.endSidebar?.startWidth ?? widget.endSidebar?.minWidth) ??
+        (widget.endSidebar?.startWidth ?? widget.endSidebar?.defaultWidth) ??
             _endSidebarWidth;
   }
 
@@ -71,8 +72,8 @@ class _MainContentAreaState extends State<MainContentArea> {
                   duration: duration,
                   curve: curve,
                   constraints: BoxConstraints(
-                    minWidth: sidebar.minWidth,
-                    maxWidth: sidebar.maxWidth!,
+                    minWidth: 0,
+                    maxWidth: width - _endSidebarWidth,
                   ).normalize(),
                   child: widget.sidebar,
                 ),
@@ -82,13 +83,12 @@ class _MainContentAreaState extends State<MainContentArea> {
               curve: curve,
               duration: duration,
               left: visibleSidebarWidth,
-              width: width - visibleSidebarWidth,
+              width: width - visibleSidebarWidth - visibleEndSidebarWidth,
               height: height,
               child: ClipRect(
                 child: widget.child ?? const SizedBox.shrink(),
               ),
             ),
-            //
             // Sidebar resizer
             if (sidebar?.isResizable ?? false)
               AnimatedPositioned(
@@ -99,6 +99,11 @@ class _MainContentAreaState extends State<MainContentArea> {
                 height: height,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
+                  onDoubleTap: () {
+                    setState(() {
+                      _sidebarWidth = sidebar!.defaultWidth;
+                    });
+                  },
                   onHorizontalDragStart: (details) {
                     _sidebarDragStartWidth = _sidebarWidth;
                     _sidebarDragStartPosition = details.globalPosition.dx;
@@ -109,17 +114,14 @@ class _MainContentAreaState extends State<MainContentArea> {
                           details.globalPosition.dx -
                           _sidebarDragStartPosition;
 
-                      _sidebarWidth = math.max(
-                        sidebar!.minWidth,
-                        math.min(
-                          sidebar.maxWidth!,
-                          newWidth,
-                        ),
+                      _sidebarWidth = math.min(
+                        width - _endSidebarWidth,
+                        newWidth,
                       );
 
-                      if (_sidebarWidth == sidebar.minWidth) {
+                      if (_sidebarWidth == sidebar!.defaultWidth) {
                         _sidebarCursor = SystemMouseCursors.resizeRight;
-                      } else if (_sidebarWidth == sidebar.maxWidth) {
+                      } else if (_sidebarWidth == (width - _endSidebarWidth)) {
                         _sidebarCursor = SystemMouseCursors.resizeLeft;
                       } else {
                         _sidebarCursor = SystemMouseCursors.resizeColumn;
@@ -139,7 +141,6 @@ class _MainContentAreaState extends State<MainContentArea> {
                   ),
                 ),
               ),
-
             // End sidebar
             if (endSidebar != null)
               AnimatedPositioned(
@@ -153,7 +154,7 @@ class _MainContentAreaState extends State<MainContentArea> {
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                   constraints: BoxConstraints(
-                    minWidth: endSidebar.minWidth,
+                    minWidth: 0,
                     maxWidth: endSidebar.maxWidth!,
                     minHeight: height,
                     maxHeight: height,
@@ -170,6 +171,11 @@ class _MainContentAreaState extends State<MainContentArea> {
                 height: height,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
+                  onDoubleTap: () {
+                    setState(() {
+                      _endSidebarWidth = endSidebar!.defaultWidth;
+                    });
+                  },
                   onHorizontalDragStart: (details) {
                     _endSidebarDragStartWidth = _endSidebarWidth;
                     _endSidebarDragStartPosition = details.globalPosition.dx;
@@ -180,17 +186,15 @@ class _MainContentAreaState extends State<MainContentArea> {
                           details.globalPosition.dx +
                           _endSidebarDragStartPosition;
 
-                      _endSidebarWidth = math.max(
-                        endSidebar!.minWidth,
-                        math.min(
-                          endSidebar.maxWidth!,
-                          newWidth,
-                        ),
+                      _endSidebarWidth = math.min(
+                        width - _sidebarWidth,
+                        newWidth,
                       );
 
-                      if (_endSidebarWidth == endSidebar.minWidth) {
+                      if (_endSidebarWidth == endSidebar!.defaultWidth) {
                         _endSidebarCursor = SystemMouseCursors.resizeLeft;
-                      } else if (_endSidebarWidth == endSidebar.maxWidth) {
+                      } else if (_endSidebarWidth ==
+                          (width - _endSidebarWidth)) {
                         _endSidebarCursor = SystemMouseCursors.resizeRight;
                       } else {
                         _endSidebarCursor = SystemMouseCursors.resizeColumn;
