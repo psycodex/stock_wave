@@ -46,11 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Main content area
                 Expanded(
                   child: Container(
-                    color: Colors.green,
                     child: MainContentArea(
                       sidebar: SideBar(
                         defaultWidth: 200,
-                        maxWidth: double.infinity,
                         child: Container(
                           color: Colors.blue,
                           child: const Center(
@@ -60,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       endSidebar: SideBar(
                         defaultWidth: 200,
-                        maxWidth: double.infinity,
                         child: Container(
                           color: Colors.red,
                           child: const Center(
@@ -71,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         color: Colors.white,
                         child: const Center(
-                          child: Text('Main Content Area1'),
+                          child: Text('Main Content Area'),
                         ),
                       ),
                     ),

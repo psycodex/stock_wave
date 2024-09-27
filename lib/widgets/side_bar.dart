@@ -4,7 +4,6 @@ class SideBar extends StatefulWidget {
   final double? startWidth;
   final Widget child;
   final double defaultWidth;
-  final double? maxWidth;
 
   final bool? isResizable;
 
@@ -13,7 +12,6 @@ class SideBar extends StatefulWidget {
     required this.child,
     required this.defaultWidth,
     this.startWidth,
-    this.maxWidth,
     this.isResizable = true,
   });
 

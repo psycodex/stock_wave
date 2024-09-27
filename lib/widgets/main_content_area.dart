@@ -155,7 +155,6 @@ class _MainContentAreaState extends State<MainContentArea> {
                   curve: Curves.easeInOut,
                   constraints: BoxConstraints(
                     minWidth: 0,
-                    maxWidth: endSidebar.maxWidth!,
                     minHeight: height,
                     maxHeight: height,
                   ).normalize(),

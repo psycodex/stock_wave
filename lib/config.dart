@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 const String emulatorIp = "127.0.0.1";
 const int firebasePort = 8080;
 const int firebaseAuth = 9099;
@@ -15,4 +18,9 @@ const placeholderImage =
 
 const ADMIN_ID = "OHl5QCGkgMO2GOZs7DsHoJeAC1w1";
 
-const tagsMaxCount = 3;
+final String? fontFamily = GoogleFonts.notoSans().fontFamily;
+const TextTheme textTheme = TextTheme(
+  displayMedium: TextStyle(fontSize: 41),
+  displaySmall: TextStyle(fontSize: 36),
+  labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
+);
