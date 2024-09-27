@@ -1,5 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_wave/widgets/bottom_tool_window.dart';
+import 'package:stock_wave/widgets/left_tool_window.dart';
+import 'package:stock_wave/widgets/main_content_area.dart';
+import 'package:stock_wave/widgets/right_tool_window.dart';
+import 'package:stock_wave/widgets/side_bar.dart';
+import 'package:stock_wave/widgets/top_tool_window.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -10,6 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int pageIndex = 0;
+
+  late final searchFieldController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -17,17 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isTopPanelOpen = false;
-    bool isBottomPanelOpen = false;
-
     return Scaffold(
       body: Column(
         children: [
           // Top tool window
           Container(
             height: 30,
-            color: Colors.blue[100],
-            child: Center(child: Text('Top Tool Window')),
+            child: TopToolWindow(),
           ),
           Expanded(
             child: Row(
@@ -35,21 +41,46 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Left tool window
                 Container(
                   width: 30,
-                  color: Colors.green[100],
-                  child: Center(child: Text('Left Tool Window')),
+                  child: LeftToolWindow(),
                 ),
                 // Main content area
                 Expanded(
                   child: Container(
-                    color: Colors.white,
-                    child: Center(child: Text('Main Content Area')),
+                    color: Colors.green,
+                    child: MainContentArea(
+                      sidebar: SideBar(
+                        minWidth: 0,
+                        maxWidth: double.infinity,
+                        child: Container(
+                          color: Colors.blue,
+                          child: Center(
+                            child: Text('Left Sidebar'),
+                          ),
+                        ),
+                      ),
+                      child: Container(
+                        color: Colors.white,
+                        child: Center(
+                          child: Text('Main Content Area1'),
+                        ),
+                      ),
+                      endSidebar: SideBar(
+                        minWidth: 0,
+                        maxWidth: double.infinity,
+                        child: Container(
+                          color: Colors.red,
+                          child: Center(
+                            child: Text('End Sidebar'),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 // Right tool window
                 Container(
                   width: 30,
-                  color: Colors.orange[100],
-                  child: Center(child: Text('Right Tool Window')),
+                  child: RightToolWindow(),
                 ),
               ],
             ),
@@ -57,11 +88,65 @@ class _HomeScreenState extends State<HomeScreen> {
           // Bottom tool window
           Container(
             height: 30,
-            color: Colors.red[100],
-            child: Center(child: Text('Bottom Tool Window')),
+            child: BottomToolWindow(),
           ),
         ],
       ),
     );
   }
 }
+
+// MainContentArea(
+// sidebar: Sidebar(
+// top: Container(),
+// defaultWidth: 0,
+// builder: (context, scrollController) {
+// return Container();
+// },
+// bottom: const macos_ui.MacosListTile(
+// leading: macos_ui.MacosIcon(
+// CupertinoIcons.profile_circled),
+// title: Text('Tim Apple'),
+// subtitle: Text('tim@apple.com'),
+// ),
+// ),
+// endSidebar: Sidebar(
+// startWidth: 200,
+// defaultWidth: 200,
+// maxWidth: 300,
+// shownByDefault: false,
+// builder: (context, _) {
+// return const Center(
+// child: Text('End Sidebar'),
+// );
+// },
+// ),
+// child: [
+// Container(
+// width: 100,
+// height: 20,
+// color: Colors.red,
+// child: Center(
+// child: Text('Page 1'),
+// ),
+// ),
+// Container(
+// color: Colors.blue,
+// child: Center(
+// child: Text('Page 2'),
+// ),
+// ),
+// Container(
+// color: Colors.green,
+// child: Center(
+// child: Text('Page 3'),
+// ),
+// ),
+// Container(
+// color: Colors.yellow,
+// child: Center(
+// child: Text('Page 4'),
+// ),
+// ),
+// ][pageIndex],
+// )
