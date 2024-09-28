@@ -10,6 +10,6 @@ Future<void> pyInitResult = Future(() => null);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  pyInitResult = initPy();
+  // pyInitResult = initPy();
   runApp(const ProviderScope(child: App()));
 }

@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: api/service.proto
+//  source: google/logging/type/log_severity.proto
 //
 // @dart = 2.12
 
@@ -11,3 +11,4 @@
 
 import 'dart:core' as $core;
 
+export 'log_severity.pbenum.dart';

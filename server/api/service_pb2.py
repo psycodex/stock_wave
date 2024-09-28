@@ -23,15 +23,16 @@ _sym_db = _symbol_database.Default()
 
 
 from api import api_pb2 as api_dot_api__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\x12\x03\x61pi\x1a\rapi/api.proto2K\n\x14NumberSortingService\x12\x33\n\x0bSortNumbers\x12\x10.api.NumberArray\x1a\x10.api.NumberArray\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\x12\x03\x61pi\x1a\rapi/api.proto\x1a\x1bgoogle/protobuf/empty.proto2\x9f\x01\n\x10StockWaveService\x12>\n\x0bListIndices\x12\x16.google.protobuf.Empty\x1a\x15.api.ListIndicesReply\"\x00\x12K\n\x11ListIndicesStocks\x12\x1d.api.ListIndicesStocksRequest\x1a\x15.api.ListIndicesReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'api.service_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_NUMBERSORTINGSERVICE']._serialized_start=41
-  _globals['_NUMBERSORTINGSERVICE']._serialized_end=116
+  _globals['_STOCKWAVESERVICE']._serialized_start=71
+  _globals['_STOCKWAVESERVICE']._serialized_end=230
 # @@protoc_insertion_point(module_scope)

@@ -10,17 +10,33 @@ package api;
 
 message Envelope {
   oneof message {
-    UpdateEodDataRequest update_eod_request = 1;
+    Hello hello = 1;
   }
 }
-message UpdateEodDataRequest {
+
+message Hello {
   string message = 1;
 }
 
-message UpdateEodDataReply {
-  string message = 1;
+message Indices {
+  string index = 1;
+  string symbol = 2;
+  string key = 3;
+}
+message Stocks {
+  string name = 1;
+  string symbol = 2;
+  string key = 3;
 }
 
-message NumberArray {
-  repeated int32 numbers = 1;
+message ListIndicesReply {
+  repeated Indices indices = 1;
+}
+
+message ListIndicesStocksRequest {
+  string symbol = 1;
+}
+
+message ListIndicesStocksReply {
+  repeated Stocks stocks = 1;
 }

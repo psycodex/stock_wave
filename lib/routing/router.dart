@@ -5,7 +5,7 @@ import 'package:stock_wave/routing/router.gr.dart';
 @AutoRouterConfig(
   replaceInRouteName: 'Page,Route',
 )
-class AppRouter extends $AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => const RouteType.material();
   @override

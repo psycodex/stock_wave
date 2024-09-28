@@ -4,6 +4,7 @@ import grpc
 import warnings
 
 from api import api_pb2 as api_dot_api__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 GRPC_GENERATED_VERSION = '1.66.1'
 GRPC_VERSION = grpc.__version__
@@ -25,7 +26,7 @@ if _version_not_supported:
     )
 
 
-class NumberSortingServiceStub(object):
+class StockWaveServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -34,43 +35,60 @@ class NumberSortingServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.SortNumbers = channel.unary_unary(
-                '/api.NumberSortingService/SortNumbers',
-                request_serializer=api_dot_api__pb2.NumberArray.SerializeToString,
-                response_deserializer=api_dot_api__pb2.NumberArray.FromString,
+        self.ListIndices = channel.unary_unary(
+                '/api.StockWaveService/ListIndices',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=api_dot_api__pb2.ListIndicesReply.FromString,
+                _registered_method=True)
+        self.ListIndicesStocks = channel.unary_unary(
+                '/api.StockWaveService/ListIndicesStocks',
+                request_serializer=api_dot_api__pb2.ListIndicesStocksRequest.SerializeToString,
+                response_deserializer=api_dot_api__pb2.ListIndicesReply.FromString,
                 _registered_method=True)
 
 
-class NumberSortingServiceServicer(object):
+class StockWaveServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def SortNumbers(self, request, context):
+    def ListIndices(self, request, context):
+        """rpc SortNumbers (NumberArray) returns (NumberArray) {}
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListIndicesStocks(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_NumberSortingServiceServicer_to_server(servicer, server):
+def add_StockWaveServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SortNumbers': grpc.unary_unary_rpc_method_handler(
-                    servicer.SortNumbers,
-                    request_deserializer=api_dot_api__pb2.NumberArray.FromString,
-                    response_serializer=api_dot_api__pb2.NumberArray.SerializeToString,
+            'ListIndices': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListIndices,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=api_dot_api__pb2.ListIndicesReply.SerializeToString,
+            ),
+            'ListIndicesStocks': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListIndicesStocks,
+                    request_deserializer=api_dot_api__pb2.ListIndicesStocksRequest.FromString,
+                    response_serializer=api_dot_api__pb2.ListIndicesReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'api.NumberSortingService', rpc_method_handlers)
+            'api.StockWaveService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('api.NumberSortingService', rpc_method_handlers)
+    server.add_registered_method_handlers('api.StockWaveService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class NumberSortingService(object):
+class StockWaveService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def SortNumbers(request,
+    def ListIndices(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,9 +101,36 @@ class NumberSortingService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/api.NumberSortingService/SortNumbers',
-            api_dot_api__pb2.NumberArray.SerializeToString,
-            api_dot_api__pb2.NumberArray.FromString,
+            '/api.StockWaveService/ListIndices',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            api_dot_api__pb2.ListIndicesReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListIndicesStocks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/api.StockWaveService/ListIndicesStocks',
+            api_dot_api__pb2.ListIndicesStocksRequest.SerializeToString,
+            api_dot_api__pb2.ListIndicesReply.FromString,
             options,
             channel_credentials,
             insecure,

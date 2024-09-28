@@ -1,17 +1,7 @@
-OSTYPE := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 API_PROTO_FILES=$(shell cd server && find api -name *.proto)
+THIRD_PARTY_PROTO_FILES=$(shell cd server && find third_party -type f -name '*.proto')
 VERSION=$(shell git describe --tags --always)
 PROTO_DIR=./server/api
-
-ifeq ($(OSTYPE), msys)
-    exeNameFull := $(exeName)_win
-else ifeq ($(OSTYPE), win32)
-    exeNameFull := $(exeName)_win
-else ifeq ($(OSTYPE), darwin)
-    exeNameFull := $(exeName)_osx
-else
-    exeNameFull := $(exeName)_lnx
-endif
 
 .PHONY: version
 #  version
@@ -22,6 +12,8 @@ version: ; $(info VERSION="$(VERSION)")
 init:
 	python -m venv .venv && source .venv/bin/activate
 	poetry install --no-root
+	pub global activate protoc_plugin
+	brew tap ktr0731/evans && brew install evans
 
 .PHONY: run
 # runs build_runner
@@ -71,8 +63,14 @@ api:
 apic:
 	cd server && protoc -I=. \
 	        --proto_path=./third_party \
-	        --dart_out=../lib \
+	        --dart_out=grpc:../lib \
             $(API_PROTO_FILES)
+	rm -rf lib/api/*.pbserver.dart
+
+.PHONY: debug_grpc
+# debug grpc
+debug_grpc:
+	 cd server && evans api/service.proto api/api.proto --port 50055
 
 # show help
 help:

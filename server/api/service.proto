@@ -3,7 +3,11 @@ syntax = "proto3";
 package api;
 
 import "api/api.proto";
+import "google/protobuf/empty.proto";
 
 service StockWaveService {
-  rpc SortNumbers (NumberArray) returns (NumberArray) {}
+//  rpc SortNumbers (NumberArray) returns (NumberArray) {}
+  rpc ListIndices (google.protobuf.Empty) returns (ListIndicesReply) {}
+
+  rpc ListIndicesStocks (ListIndicesStocksRequest) returns (ListIndicesReply) {}
 }

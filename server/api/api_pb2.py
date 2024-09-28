@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rapi/api.proto\x12\x03\x61pi\"N\n\x08\x45nvelope\x12\x37\n\x12update_eod_request\x18\x01 \x01(\x0b\x32\x19.api.UpdateEodDataRequestH\x00\x42\t\n\x07message\"\'\n\x14UpdateEodDataRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"%\n\x12UpdateEodDataReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1e\n\x0bNumberArray\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rapi/api.proto\x12\x03\x61pi\"2\n\x08\x45nvelope\x12\x1b\n\x05hello\x18\x01 \x01(\x0b\x32\n.api.HelloH\x00\x42\t\n\x07message\"\x18\n\x05Hello\x12\x0f\n\x07message\x18\x01 \x01(\t\"5\n\x07Indices\x12\r\n\x05index\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\x12\x0b\n\x03key\x18\x03 \x01(\t\"3\n\x06Stocks\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06symbol\x18\x02 \x01(\t\x12\x0b\n\x03key\x18\x03 \x01(\t\"1\n\x10ListIndicesReply\x12\x1d\n\x07indices\x18\x01 \x03(\x0b\x32\x0c.api.Indices\"*\n\x18ListIndicesStocksRequest\x12\x0e\n\x06symbol\x18\x01 \x01(\t\"5\n\x16ListIndicesStocksReply\x12\x1b\n\x06stocks\x18\x01 \x03(\x0b\x32\x0b.api.Stocksb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,11 +32,17 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'api.api_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_ENVELOPE']._serialized_start=22
-  _globals['_ENVELOPE']._serialized_end=100
-  _globals['_UPDATEEODDATAREQUEST']._serialized_start=102
-  _globals['_UPDATEEODDATAREQUEST']._serialized_end=141
-  _globals['_UPDATEEODDATAREPLY']._serialized_start=143
-  _globals['_UPDATEEODDATAREPLY']._serialized_end=180
-  _globals['_NUMBERARRAY']._serialized_start=182
-  _globals['_NUMBERARRAY']._serialized_end=212
+  _globals['_ENVELOPE']._serialized_end=72
+  _globals['_HELLO']._serialized_start=74
+  _globals['_HELLO']._serialized_end=98
+  _globals['_INDICES']._serialized_start=100
+  _globals['_INDICES']._serialized_end=153
+  _globals['_STOCKS']._serialized_start=155
+  _globals['_STOCKS']._serialized_end=206
+  _globals['_LISTINDICESREPLY']._serialized_start=208
+  _globals['_LISTINDICESREPLY']._serialized_end=257
+  _globals['_LISTINDICESSTOCKSREQUEST']._serialized_start=259
+  _globals['_LISTINDICESSTOCKSREQUEST']._serialized_end=301
+  _globals['_LISTINDICESSTOCKSREPLY']._serialized_start=303
+  _globals['_LISTINDICESSTOCKSREPLY']._serialized_end=356
 # @@protoc_insertion_point(module_scope)

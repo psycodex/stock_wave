@@ -17,7 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const Envelope$json = {
   '1': 'Envelope',
   '2': [
-    {'1': 'update_eod_request', '3': 1, '4': 1, '5': 11, '6': '.api.UpdateEodDataRequest', '9': 0, '10': 'updateEodRequest'},
+    {'1': 'hello', '3': 1, '4': 1, '5': 11, '6': '.api.Hello', '9': 0, '10': 'hello'},
   ],
   '8': [
     {'1': 'message'},
@@ -26,42 +26,86 @@ const Envelope$json = {
 
 /// Descriptor for `Envelope`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List envelopeDescriptor = $convert.base64Decode(
-    'CghFbnZlbG9wZRJJChJ1cGRhdGVfZW9kX3JlcXVlc3QYASABKAsyGS5hcGkuVXBkYXRlRW9kRG'
-    'F0YVJlcXVlc3RIAFIQdXBkYXRlRW9kUmVxdWVzdEIJCgdtZXNzYWdl');
+    'CghFbnZlbG9wZRIiCgVoZWxsbxgBIAEoCzIKLmFwaS5IZWxsb0gAUgVoZWxsb0IJCgdtZXNzYW'
+    'dl');
 
-@$core.Deprecated('Use updateEodDataRequestDescriptor instead')
-const UpdateEodDataRequest$json = {
-  '1': 'UpdateEodDataRequest',
+@$core.Deprecated('Use helloDescriptor instead')
+const Hello$json = {
+  '1': 'Hello',
   '2': [
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
-/// Descriptor for `UpdateEodDataRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateEodDataRequestDescriptor = $convert.base64Decode(
-    'ChRVcGRhdGVFb2REYXRhUmVxdWVzdBIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');
+/// Descriptor for `Hello`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List helloDescriptor = $convert.base64Decode(
+    'CgVIZWxsbxIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');
 
-@$core.Deprecated('Use updateEodDataReplyDescriptor instead')
-const UpdateEodDataReply$json = {
-  '1': 'UpdateEodDataReply',
+@$core.Deprecated('Use indicesDescriptor instead')
+const Indices$json = {
+  '1': 'Indices',
   '2': [
-    {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'index', '3': 1, '4': 1, '5': 9, '10': 'index'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'key', '3': 3, '4': 1, '5': 9, '10': 'key'},
   ],
 };
 
-/// Descriptor for `UpdateEodDataReply`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateEodDataReplyDescriptor = $convert.base64Decode(
-    'ChJVcGRhdGVFb2REYXRhUmVwbHkSGAoHbWVzc2FnZRgBIAEoCVIHbWVzc2FnZQ==');
+/// Descriptor for `Indices`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List indicesDescriptor = $convert.base64Decode(
+    'CgdJbmRpY2VzEhQKBWluZGV4GAEgASgJUgVpbmRleBIWCgZzeW1ib2wYAiABKAlSBnN5bWJvbB'
+    'IQCgNrZXkYAyABKAlSA2tleQ==');
 
-@$core.Deprecated('Use numberArrayDescriptor instead')
-const NumberArray$json = {
-  '1': 'NumberArray',
+@$core.Deprecated('Use stocksDescriptor instead')
+const Stocks$json = {
+  '1': 'Stocks',
   '2': [
-    {'1': 'numbers', '3': 1, '4': 3, '5': 5, '10': 'numbers'},
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'key', '3': 3, '4': 1, '5': 9, '10': 'key'},
   ],
 };
 
-/// Descriptor for `NumberArray`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List numberArrayDescriptor = $convert.base64Decode(
-    'CgtOdW1iZXJBcnJheRIYCgdudW1iZXJzGAEgAygFUgdudW1iZXJz');
+/// Descriptor for `Stocks`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stocksDescriptor = $convert.base64Decode(
+    'CgZTdG9ja3MSEgoEbmFtZRgBIAEoCVIEbmFtZRIWCgZzeW1ib2wYAiABKAlSBnN5bWJvbBIQCg'
+    'NrZXkYAyABKAlSA2tleQ==');
+
+@$core.Deprecated('Use listIndicesReplyDescriptor instead')
+const ListIndicesReply$json = {
+  '1': 'ListIndicesReply',
+  '2': [
+    {'1': 'indices', '3': 1, '4': 3, '5': 11, '6': '.api.Indices', '10': 'indices'},
+  ],
+};
+
+/// Descriptor for `ListIndicesReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listIndicesReplyDescriptor = $convert.base64Decode(
+    'ChBMaXN0SW5kaWNlc1JlcGx5EiYKB2luZGljZXMYASADKAsyDC5hcGkuSW5kaWNlc1IHaW5kaW'
+    'Nlcw==');
+
+@$core.Deprecated('Use listIndicesStocksRequestDescriptor instead')
+const ListIndicesStocksRequest$json = {
+  '1': 'ListIndicesStocksRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `ListIndicesStocksRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listIndicesStocksRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0SW5kaWNlc1N0b2Nrc1JlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2w=');
+
+@$core.Deprecated('Use listIndicesStocksReplyDescriptor instead')
+const ListIndicesStocksReply$json = {
+  '1': 'ListIndicesStocksReply',
+  '2': [
+    {'1': 'stocks', '3': 1, '4': 3, '5': 11, '6': '.api.Stocks', '10': 'stocks'},
+  ],
+};
+
+/// Descriptor for `ListIndicesStocksReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listIndicesStocksReplyDescriptor = $convert.base64Decode(
+    'ChZMaXN0SW5kaWNlc1N0b2Nrc1JlcGx5EiMKBnN0b2NrcxgBIAMoCzILLmFwaS5TdG9ja3NSBn'
+    'N0b2Nrcw==');
 

@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: api/service.proto
+//  source: google/api/launch_stage.proto
 //
 // @dart = 2.12
 
@@ -11,3 +11,4 @@
 
 import 'dart:core' as $core;
 
+export 'launch_stage.pbenum.dart';
