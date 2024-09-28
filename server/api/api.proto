@@ -29,6 +29,17 @@ message Stocks {
   string key = 3;
 }
 
+message Ohlcv {
+  string date = 1;
+  float open = 2;
+  float high = 3;
+  float low = 4;
+  float close = 5;
+  int64 volume = 6;
+  int64 total_trades = 7;
+  float qty_per_trade = 8;
+}
+
 message ListIndicesReply {
   repeated Indices indices = 1;
 }
@@ -39,4 +50,14 @@ message ListIndicesStocksRequest {
 
 message ListIndicesStocksReply {
   repeated Stocks stocks = 1;
+}
+
+message StockDataRequest {
+  string symbol = 1;
+  string start_date = 2;
+  string end_date = 3;
+}
+
+message StockDataReply {
+  repeated Ohlcv ohlcv = 1;
 }

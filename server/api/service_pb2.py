@@ -26,7 +26,7 @@ from api import api_pb2 as api_dot_api__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\x12\x03\x61pi\x1a\rapi/api.proto\x1a\x1bgoogle/protobuf/empty.proto2\x9f\x01\n\x10StockWaveService\x12>\n\x0bListIndices\x12\x16.google.protobuf.Empty\x1a\x15.api.ListIndicesReply\"\x00\x12K\n\x11ListIndicesStocks\x12\x1d.api.ListIndicesStocksRequest\x1a\x15.api.ListIndicesReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61pi/service.proto\x12\x03\x61pi\x1a\rapi/api.proto\x1a\x1bgoogle/protobuf/empty.proto2\xe3\x01\n\x10StockWaveService\x12>\n\x0bListIndices\x12\x16.google.protobuf.Empty\x1a\x15.api.ListIndicesReply\"\x00\x12Q\n\x11ListIndicesStocks\x12\x1d.api.ListIndicesStocksRequest\x1a\x1b.api.ListIndicesStocksReply\"\x00\x12<\n\x0cGetStockData\x12\x15.api.StockDataRequest\x1a\x13.api.StockDataReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,5 +34,5 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'api.service_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_STOCKWAVESERVICE']._serialized_start=71
-  _globals['_STOCKWAVESERVICE']._serialized_end=230
+  _globals['_STOCKWAVESERVICE']._serialized_end=298
 # @@protoc_insertion_point(module_scope)

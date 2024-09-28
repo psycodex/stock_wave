@@ -43,7 +43,12 @@ class StockWaveServiceStub(object):
         self.ListIndicesStocks = channel.unary_unary(
                 '/api.StockWaveService/ListIndicesStocks',
                 request_serializer=api_dot_api__pb2.ListIndicesStocksRequest.SerializeToString,
-                response_deserializer=api_dot_api__pb2.ListIndicesReply.FromString,
+                response_deserializer=api_dot_api__pb2.ListIndicesStocksReply.FromString,
+                _registered_method=True)
+        self.GetStockData = channel.unary_unary(
+                '/api.StockWaveService/GetStockData',
+                request_serializer=api_dot_api__pb2.StockDataRequest.SerializeToString,
+                response_deserializer=api_dot_api__pb2.StockDataReply.FromString,
                 _registered_method=True)
 
 
@@ -63,6 +68,12 @@ class StockWaveServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetStockData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StockWaveServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -74,7 +85,12 @@ def add_StockWaveServiceServicer_to_server(servicer, server):
             'ListIndicesStocks': grpc.unary_unary_rpc_method_handler(
                     servicer.ListIndicesStocks,
                     request_deserializer=api_dot_api__pb2.ListIndicesStocksRequest.FromString,
-                    response_serializer=api_dot_api__pb2.ListIndicesReply.SerializeToString,
+                    response_serializer=api_dot_api__pb2.ListIndicesStocksReply.SerializeToString,
+            ),
+            'GetStockData': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStockData,
+                    request_deserializer=api_dot_api__pb2.StockDataRequest.FromString,
+                    response_serializer=api_dot_api__pb2.StockDataReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -130,7 +146,34 @@ class StockWaveService(object):
             target,
             '/api.StockWaveService/ListIndicesStocks',
             api_dot_api__pb2.ListIndicesStocksRequest.SerializeToString,
-            api_dot_api__pb2.ListIndicesReply.FromString,
+            api_dot_api__pb2.ListIndicesStocksReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetStockData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/api.StockWaveService/GetStockData',
+            api_dot_api__pb2.StockDataRequest.SerializeToString,
+            api_dot_api__pb2.StockDataReply.FromString,
             options,
             channel_credentials,
             insecure,

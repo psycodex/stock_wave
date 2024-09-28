@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'routing/router.dart' as _i823;
+import 'services/api_service.dart' as _i905;
 import 'services/app.module.dart' as _i677;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -27,6 +28,7 @@ _i174.GetIt init(
   );
   final appModule = _$AppModule();
   gh.factory<_i823.AppRouter>(() => appModule.appRouter);
+  gh.factory<_i905.ApiService>(() => appModule.apiService);
   return getIt;
 }
 

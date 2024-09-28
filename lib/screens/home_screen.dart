@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_wave/api/api.pb.dart';
-import 'package:stock_wave/api/service.pbgrpc.dart';
-import 'package:stock_wave/client/client.dart';
-import 'package:stock_wave/google/protobuf/empty.pb.dart';
+import 'package:stock_wave/injection.dart';
+import 'package:stock_wave/services/api_service.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
-import 'package:stock_wave/widgets/left_tool_window.dart';
 import 'package:stock_wave/widgets/loading_widget.dart';
 import 'package:stock_wave/widgets/main_content_area.dart';
 import 'package:stock_wave/widgets/side_bar.dart';
@@ -20,6 +18,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _apiService = locator<ApiService>();
+  String symbol = 'NIFTY 50';
+  String stock = '';
 
   @override
   void initState() {
@@ -88,62 +89,86 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
 
-Widget getLeftSideBar() {
-  return Column(
-    children: [
-      // Top ListView
-      Expanded(
-        child: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Top Item $index'),
-            );
-          },
+  Widget getLeftSideBar() {
+    return Column(
+      children: [
+        // Top ListView
+        Expanded(
+          child: getIndicesStocks(symbol),
         ),
-      ),
-      Divider(),
-      // Bottom ListView
-      Expanded(
-        child: getIndices(),
-      ),
-    ],
-  );
-}
+        Divider(),
+        // Bottom ListView
+        Expanded(
+          child: getIndices(),
+        ),
+      ],
+    );
+  }
 
-Widget getIndices() {
-  return FutureBuilder(
-    future: listIndices(),
-    builder: (context, AsyncSnapshot<List<Indices>> snapshot) {
-      if (snapshot.hasData) {
-        if (snapshot.data!.isNotEmpty) {
-          var indices = snapshot.data!;
-          return ListView.builder(
-            itemCount: indices.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              var indice = indices[index];
-              return Text(indice.symbol);
-            },
-          );
+  Widget getIndices() {
+    return FutureBuilder(
+      future: _apiService.listIndices(),
+      builder: (context, AsyncSnapshot<List<Indices>> snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.isNotEmpty) {
+            var indices = snapshot.data!;
+            return ListView.builder(
+              itemCount: indices.length,
+              shrinkWrap: true,
+              itemBuilder: (context, i) {
+                var index = indices[i];
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      symbol = index.symbol;
+                    });
+                  },
+                  child: Text(index.symbol),
+                );
+              },
+            );
+          } else {
+            return Container();
+          }
         } else {
-          return Container();
+          return const Scaffold(
+            body: LoadingWidget(),
+          );
         }
-      } else {
-        return const Scaffold(
-          body: LoadingWidget(),
-        );
-      }
-    },
-  );
-}
+      },
+    );
+  }
 
-Future<List<Indices>> listIndices() async {
-  var client = StockWaveServiceClient(getClientChannel());
-  var request = Empty();
-
-  var r = await client.listIndices(request);
-  return r.indices;
+  Widget getIndicesStocks(String symbol) {
+    return FutureBuilder(
+      future: _apiService.listIndicesStocks(symbol),
+      builder: (context, AsyncSnapshot<List<Stocks>> snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.isNotEmpty) {
+            var stocks = snapshot.data!;
+            return ListView.builder(
+              itemCount: stocks.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                var stock = stocks[index];
+                return InkWell(
+                  onTap: () {
+                    print('Clicked on: ${stock.name}');
+                  },
+                  child: Text(stock.symbol),
+                );
+              },
+            );
+          } else {
+            return Container();
+          }
+        } else {
+          return const Scaffold(
+            body: LoadingWidget(),
+          );
+        }
+      },
+    );
+  }
 }

@@ -56,9 +56,9 @@ fi
 cd $pythonDir
 if [[ $nuitka == true ]]; then
     export PYTHONPATH="./grpc_generated"
-    $PYTHON -m nuitka server.py --standalone --onefile --output-dir=./dist --output-filename="$exeNameFull"
+    $PYTHON -m nuitka app.py --standalone --onefile --output-dir=./dist --output-filename="$exeNameFull"
 else
-    $PYTHON -m PyInstaller --onefile --noconfirm --clean --log-level=WARN --name="$exeNameFull" --paths="./grpc_generated" server.py
+    $PYTHON -m PyInstaller --onefile --noconfirm --clean --log-level=WARN --name="$exeNameFull" app.py
 fi
 cd $workingDir
 
@@ -80,13 +80,13 @@ currentDateTime=$(date +"%Y_%m_%d_%H_%M_%S")
 
 # Update version in py_file_info.dart
 
-numLines=$(wc -l < "$flutterDir"/lib/grpc_generated/py_file_info.dart)
+numLines=$(wc -l < "$flutterDir"/lib/client/py_file_info.dart)
 lastLine=$((numLines - 2))
-head -n $lastLine "$flutterDir"/lib/grpc_generated/py_file_info.dart > "$flutterDir"/lib/grpc_generated/py_file_info_temp.dart
-mv "$flutterDir"/lib/grpc_generated/py_file_info_temp.dart "$flutterDir"/lib/grpc_generated/py_file_info.dart
+head -n $lastLine "$flutterDir"/lib/client/py_file_info.dart > "$flutterDir"/lib/client/py_file_info_temp.dart
+mv "$flutterDir"/lib/client/py_file_info_temp.dart "$flutterDir"/lib/client/py_file_info.dart
 
-echo "const exeFileName = '$exeName';" >> "$flutterDir"/lib/grpc_generated/py_file_info.dart
-echo "const currentFileVersionFromAssets = '$currentDateTime';" >> "$flutterDir"/lib/grpc_generated/py_file_info.dart
+echo "const exeFileName = '$exeName';" >> "$flutterDir"/lib/client/py_file_info.dart
+echo "const currentFileVersionFromAssets = '$currentDateTime';" >> "$flutterDir"/lib/client/py_file_info.dart
 
 GREEN='\033[0;32m'
 NC='\033[0m'

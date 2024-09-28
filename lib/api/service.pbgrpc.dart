@@ -26,10 +26,14 @@ class StockWaveServiceClient extends $grpc.Client {
       '/api.StockWaveService/ListIndices',
       ($0.Empty value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.ListIndicesReply.fromBuffer(value));
-  static final _$listIndicesStocks = $grpc.ClientMethod<$1.ListIndicesStocksRequest, $1.ListIndicesReply>(
+  static final _$listIndicesStocks = $grpc.ClientMethod<$1.ListIndicesStocksRequest, $1.ListIndicesStocksReply>(
       '/api.StockWaveService/ListIndicesStocks',
       ($1.ListIndicesStocksRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $1.ListIndicesReply.fromBuffer(value));
+      ($core.List<$core.int> value) => $1.ListIndicesStocksReply.fromBuffer(value));
+  static final _$getStockData = $grpc.ClientMethod<$1.StockDataRequest, $1.StockDataReply>(
+      '/api.StockWaveService/GetStockData',
+      ($1.StockDataRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.StockDataReply.fromBuffer(value));
 
   StockWaveServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -41,8 +45,12 @@ class StockWaveServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listIndices, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.ListIndicesReply> listIndicesStocks($1.ListIndicesStocksRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$1.ListIndicesStocksReply> listIndicesStocks($1.ListIndicesStocksRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$listIndicesStocks, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$1.StockDataReply> getStockData($1.StockDataRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getStockData, request, options: options);
   }
 }
 
@@ -58,23 +66,35 @@ abstract class StockWaveServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.Empty.fromBuffer(value),
         ($1.ListIndicesReply value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.ListIndicesStocksRequest, $1.ListIndicesReply>(
+    $addMethod($grpc.ServiceMethod<$1.ListIndicesStocksRequest, $1.ListIndicesStocksReply>(
         'ListIndicesStocks',
         listIndicesStocks_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $1.ListIndicesStocksRequest.fromBuffer(value),
-        ($1.ListIndicesReply value) => value.writeToBuffer()));
+        ($1.ListIndicesStocksReply value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.StockDataRequest, $1.StockDataReply>(
+        'GetStockData',
+        getStockData_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.StockDataRequest.fromBuffer(value),
+        ($1.StockDataReply value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.ListIndicesReply> listIndices_Pre($grpc.ServiceCall call, $async.Future<$0.Empty> request) async {
     return listIndices(call, await request);
   }
 
-  $async.Future<$1.ListIndicesReply> listIndicesStocks_Pre($grpc.ServiceCall call, $async.Future<$1.ListIndicesStocksRequest> request) async {
+  $async.Future<$1.ListIndicesStocksReply> listIndicesStocks_Pre($grpc.ServiceCall call, $async.Future<$1.ListIndicesStocksRequest> request) async {
     return listIndicesStocks(call, await request);
   }
 
+  $async.Future<$1.StockDataReply> getStockData_Pre($grpc.ServiceCall call, $async.Future<$1.StockDataRequest> request) async {
+    return getStockData(call, await request);
+  }
+
   $async.Future<$1.ListIndicesReply> listIndices($grpc.ServiceCall call, $0.Empty request);
-  $async.Future<$1.ListIndicesReply> listIndicesStocks($grpc.ServiceCall call, $1.ListIndicesStocksRequest request);
+  $async.Future<$1.ListIndicesStocksReply> listIndicesStocks($grpc.ServiceCall call, $1.ListIndicesStocksRequest request);
+  $async.Future<$1.StockDataReply> getStockData($grpc.ServiceCall call, $1.StockDataRequest request);
 }

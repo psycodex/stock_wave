@@ -10,10 +10,10 @@ version: ; $(info VERSION="$(VERSION)")
 .PHONY: init
 # init env
 init:
+	go install github.com/ktr0731/evans@latest
 	python -m venv .venv && source .venv/bin/activate
 	poetry install --no-root
 	pub global activate protoc_plugin
-	brew tap ktr0731/evans && brew install evans
 
 .PHONY: run
 # runs build_runner

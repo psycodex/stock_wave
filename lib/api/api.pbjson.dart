@@ -71,6 +71,28 @@ final $typed_data.Uint8List stocksDescriptor = $convert.base64Decode(
     'CgZTdG9ja3MSEgoEbmFtZRgBIAEoCVIEbmFtZRIWCgZzeW1ib2wYAiABKAlSBnN5bWJvbBIQCg'
     'NrZXkYAyABKAlSA2tleQ==');
 
+@$core.Deprecated('Use ohlcvDescriptor instead')
+const Ohlcv$json = {
+  '1': 'Ohlcv',
+  '2': [
+    {'1': 'date', '3': 1, '4': 1, '5': 9, '10': 'date'},
+    {'1': 'open', '3': 2, '4': 1, '5': 2, '10': 'open'},
+    {'1': 'high', '3': 3, '4': 1, '5': 2, '10': 'high'},
+    {'1': 'low', '3': 4, '4': 1, '5': 2, '10': 'low'},
+    {'1': 'close', '3': 5, '4': 1, '5': 2, '10': 'close'},
+    {'1': 'volume', '3': 6, '4': 1, '5': 3, '10': 'volume'},
+    {'1': 'total_trades', '3': 7, '4': 1, '5': 3, '10': 'totalTrades'},
+    {'1': 'qty_per_trade', '3': 8, '4': 1, '5': 2, '10': 'qtyPerTrade'},
+  ],
+};
+
+/// Descriptor for `Ohlcv`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List ohlcvDescriptor = $convert.base64Decode(
+    'CgVPaGxjdhISCgRkYXRlGAEgASgJUgRkYXRlEhIKBG9wZW4YAiABKAJSBG9wZW4SEgoEaGlnaB'
+    'gDIAEoAlIEaGlnaBIQCgNsb3cYBCABKAJSA2xvdxIUCgVjbG9zZRgFIAEoAlIFY2xvc2USFgoG'
+    'dm9sdW1lGAYgASgDUgZ2b2x1bWUSIQoMdG90YWxfdHJhZGVzGAcgASgDUgt0b3RhbFRyYWRlcx'
+    'IiCg1xdHlfcGVyX3RyYWRlGAggASgCUgtxdHlQZXJUcmFkZQ==');
+
 @$core.Deprecated('Use listIndicesReplyDescriptor instead')
 const ListIndicesReply$json = {
   '1': 'ListIndicesReply',
@@ -108,4 +130,31 @@ const ListIndicesStocksReply$json = {
 final $typed_data.Uint8List listIndicesStocksReplyDescriptor = $convert.base64Decode(
     'ChZMaXN0SW5kaWNlc1N0b2Nrc1JlcGx5EiMKBnN0b2NrcxgBIAMoCzILLmFwaS5TdG9ja3NSBn'
     'N0b2Nrcw==');
+
+@$core.Deprecated('Use stockDataRequestDescriptor instead')
+const StockDataRequest$json = {
+  '1': 'StockDataRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'start_date', '3': 2, '4': 1, '5': 9, '10': 'startDate'},
+    {'1': 'end_date', '3': 3, '4': 1, '5': 9, '10': 'endDate'},
+  ],
+};
+
+/// Descriptor for `StockDataRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stockDataRequestDescriptor = $convert.base64Decode(
+    'ChBTdG9ja0RhdGFSZXF1ZXN0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEh0KCnN0YXJ0X2RhdG'
+    'UYAiABKAlSCXN0YXJ0RGF0ZRIZCghlbmRfZGF0ZRgDIAEoCVIHZW5kRGF0ZQ==');
+
+@$core.Deprecated('Use stockDataReplyDescriptor instead')
+const StockDataReply$json = {
+  '1': 'StockDataReply',
+  '2': [
+    {'1': 'ohlcv', '3': 1, '4': 3, '5': 11, '6': '.api.Ohlcv', '10': 'ohlcv'},
+  ],
+};
+
+/// Descriptor for `StockDataReply`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stockDataReplyDescriptor = $convert.base64Decode(
+    'Cg5TdG9ja0RhdGFSZXBseRIgCgVvaGxjdhgBIAMoCzIKLmFwaS5PaGxjdlIFb2hsY3Y=');
 

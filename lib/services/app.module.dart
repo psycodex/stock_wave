@@ -1,6 +1,6 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:stock_wave/routing/router.dart';
+import 'package:stock_wave/services/api_service.dart';
 
 @module
 abstract class AppModule {
@@ -45,8 +45,8 @@ abstract class AppModule {
   // @preResolve
   // Future<IsarDb> get isar async => await getIsar();
 
-// @injectable
-// DataContainer get dataContainer => DataContainer();
+  @injectable
+  ApiService get apiService => ApiService();
 
 // @preResolve
 // Logger get logger => Logger(

@@ -9,5 +9,7 @@ service StockWaveService {
 //  rpc SortNumbers (NumberArray) returns (NumberArray) {}
   rpc ListIndices (google.protobuf.Empty) returns (ListIndicesReply) {}
 
-  rpc ListIndicesStocks (ListIndicesStocksRequest) returns (ListIndicesReply) {}
+  rpc ListIndicesStocks (ListIndicesStocksRequest) returns (ListIndicesStocksReply) {}
+
+  rpc GetStockData (StockDataRequest) returns (StockDataReply) {}
 }

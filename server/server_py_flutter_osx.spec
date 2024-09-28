@@ -2,8 +2,8 @@
 
 
 a = Analysis(
-    ['server.py'],
-    pathex=['./grpc_generated'],
+    ['app.py'],
+    pathex=[],
     binaries=[],
     datas=[],
     hiddenimports=[],

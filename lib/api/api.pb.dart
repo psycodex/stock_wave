@@ -11,6 +11,7 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 enum Envelope_Message {
@@ -284,6 +285,154 @@ class Stocks extends $pb.GeneratedMessage {
   void clearKey() => clearField(3);
 }
 
+class Ohlcv extends $pb.GeneratedMessage {
+  factory Ohlcv({
+    $core.String? date,
+    $core.double? open,
+    $core.double? high,
+    $core.double? low,
+    $core.double? close,
+    $fixnum.Int64? volume,
+    $fixnum.Int64? totalTrades,
+    $core.double? qtyPerTrade,
+  }) {
+    final $result = create();
+    if (date != null) {
+      $result.date = date;
+    }
+    if (open != null) {
+      $result.open = open;
+    }
+    if (high != null) {
+      $result.high = high;
+    }
+    if (low != null) {
+      $result.low = low;
+    }
+    if (close != null) {
+      $result.close = close;
+    }
+    if (volume != null) {
+      $result.volume = volume;
+    }
+    if (totalTrades != null) {
+      $result.totalTrades = totalTrades;
+    }
+    if (qtyPerTrade != null) {
+      $result.qtyPerTrade = qtyPerTrade;
+    }
+    return $result;
+  }
+  Ohlcv._() : super();
+  factory Ohlcv.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Ohlcv.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Ohlcv', package: const $pb.PackageName(_omitMessageNames ? '' : 'api'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'date')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'open', $pb.PbFieldType.OF)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'high', $pb.PbFieldType.OF)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'low', $pb.PbFieldType.OF)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'close', $pb.PbFieldType.OF)
+    ..aInt64(6, _omitFieldNames ? '' : 'volume')
+    ..aInt64(7, _omitFieldNames ? '' : 'totalTrades')
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'qtyPerTrade', $pb.PbFieldType.OF)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Ohlcv clone() => Ohlcv()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Ohlcv copyWith(void Function(Ohlcv) updates) => super.copyWith((message) => updates(message as Ohlcv)) as Ohlcv;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Ohlcv create() => Ohlcv._();
+  Ohlcv createEmptyInstance() => create();
+  static $pb.PbList<Ohlcv> createRepeated() => $pb.PbList<Ohlcv>();
+  @$core.pragma('dart2js:noInline')
+  static Ohlcv getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Ohlcv>(create);
+  static Ohlcv? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get date => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set date($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDate() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get open => $_getN(1);
+  @$pb.TagNumber(2)
+  set open($core.double v) { $_setFloat(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOpen() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOpen() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get high => $_getN(2);
+  @$pb.TagNumber(3)
+  set high($core.double v) { $_setFloat(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasHigh() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHigh() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get low => $_getN(3);
+  @$pb.TagNumber(4)
+  set low($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasLow() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLow() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get close => $_getN(4);
+  @$pb.TagNumber(5)
+  set close($core.double v) { $_setFloat(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasClose() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearClose() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get volume => $_getI64(5);
+  @$pb.TagNumber(6)
+  set volume($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasVolume() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearVolume() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get totalTrades => $_getI64(6);
+  @$pb.TagNumber(7)
+  set totalTrades($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasTotalTrades() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTotalTrades() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.double get qtyPerTrade => $_getN(7);
+  @$pb.TagNumber(8)
+  set qtyPerTrade($core.double v) { $_setFloat(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasQtyPerTrade() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearQtyPerTrade() => clearField(8);
+}
+
 class ListIndicesReply extends $pb.GeneratedMessage {
   factory ListIndicesReply({
     $core.Iterable<Indices>? indices,
@@ -420,6 +569,128 @@ class ListIndicesStocksReply extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<Stocks> get stocks => $_getList(0);
+}
+
+class StockDataRequest extends $pb.GeneratedMessage {
+  factory StockDataRequest({
+    $core.String? symbol,
+    $core.String? startDate,
+    $core.String? endDate,
+  }) {
+    final $result = create();
+    if (symbol != null) {
+      $result.symbol = symbol;
+    }
+    if (startDate != null) {
+      $result.startDate = startDate;
+    }
+    if (endDate != null) {
+      $result.endDate = endDate;
+    }
+    return $result;
+  }
+  StockDataRequest._() : super();
+  factory StockDataRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StockDataRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StockDataRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'api'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'startDate')
+    ..aOS(3, _omitFieldNames ? '' : 'endDate')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StockDataRequest clone() => StockDataRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StockDataRequest copyWith(void Function(StockDataRequest) updates) => super.copyWith((message) => updates(message as StockDataRequest)) as StockDataRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StockDataRequest create() => StockDataRequest._();
+  StockDataRequest createEmptyInstance() => create();
+  static $pb.PbList<StockDataRequest> createRepeated() => $pb.PbList<StockDataRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StockDataRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StockDataRequest>(create);
+  static StockDataRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get startDate => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set startDate($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStartDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStartDate() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get endDate => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set endDate($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasEndDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEndDate() => clearField(3);
+}
+
+class StockDataReply extends $pb.GeneratedMessage {
+  factory StockDataReply({
+    $core.Iterable<Ohlcv>? ohlcv,
+  }) {
+    final $result = create();
+    if (ohlcv != null) {
+      $result.ohlcv.addAll(ohlcv);
+    }
+    return $result;
+  }
+  StockDataReply._() : super();
+  factory StockDataReply.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StockDataReply.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StockDataReply', package: const $pb.PackageName(_omitMessageNames ? '' : 'api'), createEmptyInstance: create)
+    ..pc<Ohlcv>(1, _omitFieldNames ? '' : 'ohlcv', $pb.PbFieldType.PM, subBuilder: Ohlcv.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StockDataReply clone() => StockDataReply()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StockDataReply copyWith(void Function(StockDataReply) updates) => super.copyWith((message) => updates(message as StockDataReply)) as StockDataReply;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StockDataReply create() => StockDataReply._();
+  StockDataReply createEmptyInstance() => create();
+  static $pb.PbList<StockDataReply> createRepeated() => $pb.PbList<StockDataReply>();
+  @$core.pragma('dart2js:noInline')
+  static StockDataReply getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StockDataReply>(create);
+  static StockDataReply? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Ohlcv> get ohlcv => $_getList(0);
 }
 
 

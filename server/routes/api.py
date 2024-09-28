@@ -1,4 +1,7 @@
 from typing import List, Type, Union, Optional
+
+import grpc
+
 from api import service_pb2_grpc
 from api import api_pb2
 import pandas as pd
@@ -6,9 +9,6 @@ import pandas as pd
 import config
 from fastapi import APIRouter, Query
 
-from models.Ohlcv import Ohlcv
-from models.indices import Indices
-from models.stocks import Stocks
 from fastapi.responses import JSONResponse
 from loguru import logger
 
@@ -26,6 +26,8 @@ class StockWaveService(service_pb2_grpc.StockWaveServiceServicer):
                 index_obj.symbol = row['indexSymbol']
                 index_obj.key = row['key']
         except FileNotFoundError as e:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details('File not found')
             logger.error(f"File not found: {e}")
 
         return reply
@@ -40,27 +42,38 @@ class StockWaveService(service_pb2_grpc.StockWaveServiceServicer):
                 stock_obj.symbol = row['symbol']
                 # stock_obj.key = row['key']
         except FileNotFoundError as e:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details('File not found')
             logger.error(f"File not found: {e}")
         return reply
 
+    def GetStockData(self, request, context):
+        reply = api_pb2.StockDataReply()
+        try:
+            df = pd.read_csv(str(config.DAILY_FOLDER / (request.symbol + ".csv")))
+        except FileNotFoundError:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details('File not found')
+            return reply
 
-@router.get("/get_stocks_data/{symbol}", response_model=List[Ohlcv])
-async def get_stocks_data(symbol: str, start_date: Optional[str] = Query(None),
-                          end_date: Optional[str] = Query(None)) -> JSONResponse:
-    try:
-        df = pd.read_csv(str(config.DAILY_FOLDER / (symbol + ".csv")))
-    except FileNotFoundError:
-        return JSONResponse(content=[])
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.fillna(0)
+        if request.start_date:
+            df = df[df['Date'] >= pd.to_datetime(request.start_date)]
+        if request.end_date:
+            df = df[df['Date'] <= pd.to_datetime(request.end_date)]
 
-    df['Date'] = pd.to_datetime(df['Date'])
-    df = df.fillna(0)
-    if start_date:
-        df = df[df['Date'] >= pd.to_datetime(start_date)]
-    if end_date:
-        df = df[df['Date'] <= pd.to_datetime(end_date)]
+        df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+        selected_columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
+        result = df[selected_columns].to_dict(orient='records')
 
-    df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
-    selected_columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
-    result = df[selected_columns].to_dict(orient='records')
+        for record in result:
+            stock_data = reply.data.add()
+            stock_data.date = record['Date']
+            stock_data.open = record['Open']
+            stock_data.high = record['High']
+            stock_data.low = record['Low']
+            stock_data.close = record['Close']
+            stock_data.volume = record['Volume']
 
-    return JSONResponse(content=result)
+        return reply
