@@ -80,9 +80,9 @@ const Ohlcv$json = {
     {'1': 'high', '3': 3, '4': 1, '5': 2, '10': 'high'},
     {'1': 'low', '3': 4, '4': 1, '5': 2, '10': 'low'},
     {'1': 'close', '3': 5, '4': 1, '5': 2, '10': 'close'},
-    {'1': 'volume', '3': 6, '4': 1, '5': 3, '10': 'volume'},
-    {'1': 'total_trades', '3': 7, '4': 1, '5': 3, '10': 'totalTrades'},
-    {'1': 'qty_per_trade', '3': 8, '4': 1, '5': 2, '10': 'qtyPerTrade'},
+    {'1': 'volume', '3': 6, '4': 1, '5': 1, '10': 'volume'},
+    {'1': 'total_trades', '3': 7, '4': 1, '5': 1, '10': 'totalTrades'},
+    {'1': 'qty_per_trade', '3': 8, '4': 1, '5': 1, '10': 'qtyPerTrade'},
   ],
 };
 
@@ -90,8 +90,8 @@ const Ohlcv$json = {
 final $typed_data.Uint8List ohlcvDescriptor = $convert.base64Decode(
     'CgVPaGxjdhISCgRkYXRlGAEgASgJUgRkYXRlEhIKBG9wZW4YAiABKAJSBG9wZW4SEgoEaGlnaB'
     'gDIAEoAlIEaGlnaBIQCgNsb3cYBCABKAJSA2xvdxIUCgVjbG9zZRgFIAEoAlIFY2xvc2USFgoG'
-    'dm9sdW1lGAYgASgDUgZ2b2x1bWUSIQoMdG90YWxfdHJhZGVzGAcgASgDUgt0b3RhbFRyYWRlcx'
-    'IiCg1xdHlfcGVyX3RyYWRlGAggASgCUgtxdHlQZXJUcmFkZQ==');
+    'dm9sdW1lGAYgASgBUgZ2b2x1bWUSIQoMdG90YWxfdHJhZGVzGAcgASgBUgt0b3RhbFRyYWRlcx'
+    'IiCg1xdHlfcGVyX3RyYWRlGAggASgBUgtxdHlQZXJUcmFkZQ==');
 
 @$core.Deprecated('Use listIndicesReplyDescriptor instead')
 const ListIndicesReply$json = {

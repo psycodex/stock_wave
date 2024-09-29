@@ -11,7 +11,6 @@
 
 import 'dart:core' as $core;
 
-import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 enum Envelope_Message {
@@ -292,8 +291,8 @@ class Ohlcv extends $pb.GeneratedMessage {
     $core.double? high,
     $core.double? low,
     $core.double? close,
-    $fixnum.Int64? volume,
-    $fixnum.Int64? totalTrades,
+    $core.double? volume,
+    $core.double? totalTrades,
     $core.double? qtyPerTrade,
   }) {
     final $result = create();
@@ -333,9 +332,9 @@ class Ohlcv extends $pb.GeneratedMessage {
     ..a<$core.double>(3, _omitFieldNames ? '' : 'high', $pb.PbFieldType.OF)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'low', $pb.PbFieldType.OF)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'close', $pb.PbFieldType.OF)
-    ..aInt64(6, _omitFieldNames ? '' : 'volume')
-    ..aInt64(7, _omitFieldNames ? '' : 'totalTrades')
-    ..a<$core.double>(8, _omitFieldNames ? '' : 'qtyPerTrade', $pb.PbFieldType.OF)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'volume', $pb.PbFieldType.OD)
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'totalTrades', $pb.PbFieldType.OD)
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'qtyPerTrade', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -406,18 +405,18 @@ class Ohlcv extends $pb.GeneratedMessage {
   void clearClose() => clearField(5);
 
   @$pb.TagNumber(6)
-  $fixnum.Int64 get volume => $_getI64(5);
+  $core.double get volume => $_getN(5);
   @$pb.TagNumber(6)
-  set volume($fixnum.Int64 v) { $_setInt64(5, v); }
+  set volume($core.double v) { $_setDouble(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasVolume() => $_has(5);
   @$pb.TagNumber(6)
   void clearVolume() => clearField(6);
 
   @$pb.TagNumber(7)
-  $fixnum.Int64 get totalTrades => $_getI64(6);
+  $core.double get totalTrades => $_getN(6);
   @$pb.TagNumber(7)
-  set totalTrades($fixnum.Int64 v) { $_setInt64(6, v); }
+  set totalTrades($core.double v) { $_setDouble(6, v); }
   @$pb.TagNumber(7)
   $core.bool hasTotalTrades() => $_has(6);
   @$pb.TagNumber(7)
@@ -426,7 +425,7 @@ class Ohlcv extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.double get qtyPerTrade => $_getN(7);
   @$pb.TagNumber(8)
-  set qtyPerTrade($core.double v) { $_setFloat(7, v); }
+  set qtyPerTrade($core.double v) { $_setDouble(7, v); }
   @$pb.TagNumber(8)
   $core.bool hasQtyPerTrade() => $_has(7);
   @$pb.TagNumber(8)

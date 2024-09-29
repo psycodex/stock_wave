@@ -19,4 +19,12 @@ class ApiService {
     var r = await client.listIndicesStocks(request);
     return r.stocks;
   }
+
+  Future<List<Ohlcv>> getStockData(String symbol) async {
+    var client = StockWaveServiceClient(getClientChannel());
+    var request = StockDataRequest(symbol: symbol);
+
+    var r = await client.getStockData(request);
+    return r.ohlcv;
+  }
 }

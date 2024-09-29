@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  k_chart: ^0.7.1
   cupertino_icons: ^1.0.8
   grpc: ^4.0.1
   protobuf: ^3.1.0

@@ -35,9 +35,9 @@ message Ohlcv {
   float high = 3;
   float low = 4;
   float close = 5;
-  int64 volume = 6;
-  int64 total_trades = 7;
-  float qty_per_trade = 8;
+  double volume = 6;
+  double total_trades = 7;
+  double qty_per_trade = 8;
 }
 
 message ListIndicesReply {

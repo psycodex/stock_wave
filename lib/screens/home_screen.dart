@@ -1,8 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:k_chart_plus/chart_style.dart';
+import 'package:k_chart_plus/entity/k_line_entity.dart';
+import 'package:k_chart_plus/k_chart_widget.dart';
+import 'package:k_chart_plus/utils/data_util.dart';
 import 'package:stock_wave/api/api.pb.dart';
 import 'package:stock_wave/injection.dart';
 import 'package:stock_wave/services/api_service.dart';
+import 'package:stock_wave/utils/utils.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
 import 'package:stock_wave/widgets/loading_widget.dart';
 import 'package:stock_wave/widgets/main_content_area.dart';
@@ -21,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final _apiService = locator<ApiService>();
   String symbol = 'NIFTY 50';
   String stock = '';
+  ChartStyle chartStyle = ChartStyle();
+  ChartColors chartColors = ChartColors();
+  List<KLineEntity>? datas;
+  final MainState _mainState = MainState.MA;
+  final bool _volHidden = false;
+  final List<SecondaryState> _secondaryStateLi = [SecondaryState.RSI];
 
   @override
   void initState() {
@@ -64,12 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     ),
                     //   ),
                     // ),
-                    child: Container(
-                      color: Colors.white,
-                      child: const Center(
-                        child: Text('Main Content Area'),
-                      ),
-                    ),
+                    child: getChart(),
                   ),
                 ),
                 // Right tool window
@@ -153,8 +159,12 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 var stock = stocks[index];
                 return InkWell(
-                  onTap: () {
-                    print('Clicked on: ${stock.name}');
+                  onTap: () async {
+                    var ohlcvs = await _apiService.getStockData(stock.symbol);
+                    setState(() {
+                      datas = convertOhlcvsToKLineEntities(ohlcvs);
+                      DataUtil.calculate(datas!);
+                    });
                   },
                   child: Text(stock.symbol),
                 );
@@ -168,6 +178,34 @@ class _HomeScreenState extends State<HomeScreen> {
             body: LoadingWidget(),
           );
         }
+      },
+    );
+  }
+
+  Widget getChart() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final height = constraints.maxHeight;
+
+        return Stack(
+          children: [
+            KChartWidget(
+              datas,
+              chartStyle,
+              chartColors,
+              mBaseHeight: height,
+              isTrendLine: false,
+              mainState: _mainState,
+              volHidden: _volHidden,
+              secondaryStateLi: _secondaryStateLi.toSet(),
+              fixedLength: 2,
+              timeFormat: TimeFormat.YEAR_MONTH_DAY,
+              maDayList: [5, 10, 20],
+              showNowPrice: true,
+            )
+          ],
+        );
       },
     );
   }

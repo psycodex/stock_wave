@@ -64,16 +64,16 @@ class StockWaveService(service_pb2_grpc.StockWaveServiceServicer):
             df = df[df['Date'] <= pd.to_datetime(request.end_date)]
 
         df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
-        selected_columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
-        result = df[selected_columns].to_dict(orient='records')
+        result = df.to_dict(orient='records')
 
         for record in result:
-            stock_data = reply.data.add()
+            stock_data = reply.ohlcv.add()
             stock_data.date = record['Date']
             stock_data.open = record['Open']
             stock_data.high = record['High']
             stock_data.low = record['Low']
             stock_data.close = record['Close']
             stock_data.volume = record['Volume']
+            stock_data.total_trades = record['TOTAL_TRADES']
 
         return reply

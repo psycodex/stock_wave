@@ -65,6 +65,10 @@ apic:
 	        --proto_path=./third_party \
 	        --dart_out=grpc:../lib \
             $(API_PROTO_FILES)
+	cd server && protoc -I=. \
+	        --proto_path=./third_party \
+	        --dart_out=../lib \
+            $(API_PROTO_FILES)
 	rm -rf lib/api/*.pbserver.dart
 
 .PHONY: debug_grpc
