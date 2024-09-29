@@ -16,7 +16,7 @@ class _BottomToolWindowState extends State<BottomToolWindow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red[100],
+      // color: Colors.red[100],
       child: const Center(child: Text('Bottom Tool Window')),
     );
   }

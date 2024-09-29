@@ -4,8 +4,10 @@ import 'package:k_chart_plus/chart_style.dart';
 import 'package:k_chart_plus/entity/k_line_entity.dart';
 import 'package:k_chart_plus/k_chart_widget.dart';
 import 'package:k_chart_plus/utils/data_util.dart';
+import 'package:macos_ui/macos_ui.dart';
 import 'package:stock_wave/api/api.pb.dart';
 import 'package:stock_wave/injection.dart';
+import 'package:stock_wave/platform_menus.dart';
 import 'package:stock_wave/services/api_service.dart';
 import 'package:stock_wave/utils/utils.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
@@ -40,6 +42,63 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return PlatformMenuBar(
+      menus: menuBarItems(),
+      child: MacosWindow(
+        child: Column(
+          children: [
+            // Top tool window
+            SizedBox(
+              height: 45,
+              child: TopToolWindow(),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  // Left tool window
+                  // SizedBox(
+                  //   width: 30,
+                  //   child: LeftToolWindow(),
+                  // ),
+                  // Main content area
+                  Expanded(
+                    child: MainContentArea(
+                      sidebar: SideBar(
+                        defaultWidth: 400,
+                        child: Container(
+                          // color: Colors.blue,
+                          child: getLeftSideBar(),
+                        ),
+                      ),
+                      // endSidebar: SideBar(
+                      //   defaultWidth: 200,
+                      //   child: Container(
+                      //     color: Colors.red,
+                      //     child: const Center(
+                      //       child: Text('End Sidebar'),
+                      //     ),
+                      //   ),
+                      // ),
+                      child: getChart(),
+                    ),
+                  ),
+                  // Right tool window
+                  // Container(
+                  //   width: 30,
+                  //   child: RightToolWindow(),
+                  // ),
+                ],
+              ),
+            ),
+            // Bottom tool window
+            SizedBox(
+              height: 30,
+              child: BottomToolWindow(),
+            ),
+          ],
+        ),
+      ),
+    );
     return Scaffold(
       body: Column(
         children: [
@@ -124,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               itemBuilder: (context, i) {
                 var index = indices[i];
-                return InkWell(
+                return GestureDetector(
                   onTap: () {
                     setState(() {
                       symbol = index.symbol;
@@ -158,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 var stock = stocks[index];
-                return InkWell(
+                return GestureDetector(
                   onTap: () async {
                     var ohlcvs = await _apiService.getStockData(stock.symbol);
                     setState(() {

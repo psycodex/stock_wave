@@ -16,7 +16,7 @@ class _TopToolWindowState extends State<TopToolWindow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue[100],
+      // color: Colors.blue[100],
       child: const Center(child: Text('Top Tool Window')),
     );
   }

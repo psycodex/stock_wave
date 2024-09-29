@@ -26,8 +26,9 @@ class ThemeController with ChangeNotifier {
     // if (notify) notifyListeners();
   }
 
-  // ThemeMode _themeMode = ThemeMode.dark;
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.dark;
+  // ThemeMode _themeMode = ThemeMode.light;
+  // ThemeMode _themeMode = ThemeMode.system;
 
   ThemeMode get themeMode => _themeMode;
 
