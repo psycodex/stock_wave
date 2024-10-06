@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stock_wave/config.dart';
 import 'package:stock_wave/widgets/rounded_icon.dart';
 
 class LeftToolWindow extends StatefulWidget {
   int selectedIndex;
+  final ValueChanged<int> onIndexChanged;
 
-  LeftToolWindow({super.key, required this.selectedIndex});
+  LeftToolWindow(
+      {super.key, required this.selectedIndex, required this.onIndexChanged});
 
   @override
   State<LeftToolWindow> createState() => _LeftToolWindowState();
@@ -40,24 +43,21 @@ class _LeftToolWindowState extends State<LeftToolWindow> {
             ),
           ],
         ),
-        Container(
-          margin: EdgeInsets.only(bottom: 5),
-          child: Column(
-            children: [
-              RoundedIconContainer(
-                  icon: Icons.info,
-                  background: widget.selectedIndex == 3,
-                  onPressed: () => onButtonPressed(3)),
-              RoundedIconContainer(
-                  icon: Icons.help,
-                  background: widget.selectedIndex == 4,
-                  onPressed: () => onButtonPressed(4)),
-              RoundedIconContainer(
-                  icon: Icons.logout,
-                  background: widget.selectedIndex == 5,
-                  onPressed: () => onButtonPressed(5)),
-            ],
-          ),
+        Column(
+          children: [
+            RoundedIconContainer(
+                icon: Icons.info,
+                background: widget.selectedIndex == 3,
+                onPressed: () => onButtonPressed(3)),
+            RoundedIconContainer(
+                icon: Icons.help,
+                background: widget.selectedIndex == 4,
+                onPressed: () => onButtonPressed(4)),
+            RoundedIconContainer(
+                icon: Icons.logout,
+                background: widget.selectedIndex == 5,
+                onPressed: () => onButtonPressed(5)),
+          ],
         ),
       ],
     );
@@ -65,7 +65,7 @@ class _LeftToolWindowState extends State<LeftToolWindow> {
 
   onButtonPressed(int index) {
     setState(() {
-      widget.selectedIndex = index;
+      widget.onIndexChanged(index);
     });
   }
 }

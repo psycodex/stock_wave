@@ -9,23 +9,23 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:stock_wave/screens/home_screen.dart' as _i1;
+import 'package:stock_wave/screens/dashboard_screen.dart' as _i1;
 
 /// generated route for
-/// [_i1.HomeScreen]
-class HomeScreen extends _i2.PageRouteInfo<void> {
-  const HomeScreen({List<_i2.PageRouteInfo>? children})
+/// [_i1.DashboardScreen]
+class DashboardScreen extends _i2.PageRouteInfo<void> {
+  const DashboardScreen({List<_i2.PageRouteInfo>? children})
       : super(
-          HomeScreen.name,
+          DashboardScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeScreen';
+  static const String name = 'DashboardScreen';
 
   static _i2.PageInfo page = _i2.PageInfo(
     name,
     builder: (data) {
-      return const _i1.HomeScreen();
+      return const _i1.DashboardScreen();
     },
   );
 }

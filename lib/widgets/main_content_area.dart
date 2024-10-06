@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stock_wave/config.dart';
 import 'package:stock_wave/widgets/side_bar.dart';
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, TargetPlatform;
@@ -77,7 +78,9 @@ class _MainContentAreaState extends State<MainContentArea> {
                   duration: duration,
                   curve: curve,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 0.5),
+                    border: Border(
+                      right: BorderSide(color: Colors.black, width: windowBorderSize),
+                    ),
                   ),
                   constraints: BoxConstraints(
                     minWidth: 0,

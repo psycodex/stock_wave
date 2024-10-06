@@ -11,7 +11,7 @@ class AppRouter extends RootStackRouter {
   @override
   final List<AutoRoute> routes = [
     AutoRoute(
-        page: HomeScreen.page,
+        page: DashboardScreen.page,
         path: '/',
         children: const [],
         guards: [AuthGuard()]),

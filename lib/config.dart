@@ -24,3 +24,5 @@ const TextTheme textTheme = TextTheme(
   displaySmall: TextStyle(fontSize: 36),
   labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
 );
+
+const double windowBorderSize = 1;

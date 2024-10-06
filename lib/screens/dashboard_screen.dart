@@ -1,40 +1,38 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:k_chart_plus/chart_style.dart';
 import 'package:k_chart_plus/entity/k_line_entity.dart';
-import 'package:k_chart_plus/k_chart_widget.dart';
-import 'package:k_chart_plus/utils/data_util.dart';
 import 'package:macos_ui/macos_ui.dart';
-import 'package:stock_wave/api/api.pb.dart';
-import 'package:stock_wave/injection.dart';
+import 'package:stock_wave/config.dart';
 import 'package:stock_wave/platform_menus.dart';
 import 'package:stock_wave/screens/home_ui.dart';
 import 'package:stock_wave/screens/search_ui.dart';
-import 'package:stock_wave/services/api_service.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
 import 'package:stock_wave/widgets/left_tool_window.dart';
 import 'package:stock_wave/widgets/top_tool_window.dart';
 
 @RoutePage()
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomeScreenState();
+  State<StatefulWidget> createState() => _DashboardScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   String indexSymbol = 'NIFTY 50';
   String stockSymbol = '';
-  List<KLineEntity>? datas;
+  List<KLineEntity>? data;
   int selectedIndex = 0;
+  HomeUI? homeUI;
 
   @override
   Widget build(BuildContext context) {
     Widget childWidget;
+    homeUI ??= HomeUI(selectedIndex: selectedIndex);
+
     switch (selectedIndex) {
       case 0:
-        childWidget = HomeUI(selectedIndex: selectedIndex);
+        childWidget = homeUI!;
         break;
       case 1:
         childWidget = SearchUi();
@@ -55,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
         childWidget = Container();
         break;
     }
-    setState(() {});
     return PlatformMenuBar(
       menus: menuBarItems(),
       child: MacosWindow(
@@ -63,10 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Top tool window
             Container(
-              height: 45,
+              height: 45.0,
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(color: Colors.black, width: 0.5),
+                  bottom:
+                      BorderSide(color: Colors.black, width: windowBorderSize),
                 ),
               ),
               child: TopToolWindow(),
@@ -76,14 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // Left tool window
                   Container(
-                    width: 50,
+                    width: 50.0,
                     decoration: BoxDecoration(
                       border: Border(
-                        top: BorderSide(color: Colors.black, width: 0.5),
-                        bottom: BorderSide(color: Colors.black, width: 0.5),
+                        right: BorderSide(
+                            color: Colors.black, width: windowBorderSize),
                       ),
                     ),
-                    child: LeftToolWindow(selectedIndex: selectedIndex),
+                    child: LeftToolWindow(
+                        selectedIndex: selectedIndex,
+                        onIndexChanged: _onIndexChanged),
                   ),
                   // Main content area
                   Expanded(
@@ -99,10 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // Bottom tool window
             Container(
-              height: 30,
+              height: 30.0,
               decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: Colors.black, width: 0.5),
+                  top: BorderSide(color: Colors.black, width: windowBorderSize),
                 ),
               ),
               child: BottomToolWindow(),
@@ -111,5 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void _onIndexChanged(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 }
