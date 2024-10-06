@@ -37,7 +37,7 @@ class _AppState extends ConsumerState<App> {
     var routerDelegate = _appRouter.delegate();
     var routeInformationParser = _appRouter.defaultRouteParser();
     var lightTheme = AppTheme.light(controller);
-    var darkTheme = AppTheme.dark(controller);
+    var darkTheme = darculaTheme; // AppTheme.dark(controller);
 
     if (defaultTargetPlatform == TargetPlatform.windows) {
       return fluent.FluentApp.router(

@@ -11,6 +11,7 @@ import 'package:stock_wave/platform_menus.dart';
 import 'package:stock_wave/services/api_service.dart';
 import 'package:stock_wave/utils/utils.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
+import 'package:stock_wave/widgets/left_tool_window.dart';
 import 'package:stock_wave/widgets/loading_widget.dart';
 import 'package:stock_wave/widgets/main_content_area.dart';
 import 'package:stock_wave/widgets/side_bar.dart';
@@ -56,10 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: [
                   // Left tool window
-                  // SizedBox(
-                  //   width: 30,
-                  //   child: LeftToolWindow(),
-                  // ),
+                  SizedBox(
+                    width: 30,
+                    child: LeftToolWindow(),
+                  ),
                   // Main content area
                   Expanded(
                     child: MainContentArea(

@@ -16,7 +16,7 @@ class _LeftToolWindowState extends State<LeftToolWindow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green[100],
+      // color: Colors.green[100],
       child: const Center(child: Text('Left Tool Window')),
     );
   }
