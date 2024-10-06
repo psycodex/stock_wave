@@ -46,32 +46,3 @@ class _StockChartState extends State<StockChart> {
     );
   }
 }
-//
-// @override
-// Widget build(BuildContext context) {
-//   return LayoutBuilder(
-//     builder: (context, constraints) {
-//       // final width = constraints.maxWidth;
-//       final height = constraints.maxHeight;
-//
-//       return Stack(
-//         children: [
-//           KChartWidget(
-//             datas,
-//             chartStyle,
-//             chartColors,
-//             mBaseHeight: height,
-//             isTrendLine: false,
-//             mainState: _mainState,
-//             volHidden: _volHidden,
-//             secondaryStateLi: _secondaryStateLi.toSet(),
-//             fixedLength: 2,
-//             timeFormat: TimeFormat.YEAR_MONTH_DAY,
-//             maDayList: [5, 10, 20],
-//             showNowPrice: true,
-//           )
-//         ],
-//       );
-//     },
-//   );
-// }}

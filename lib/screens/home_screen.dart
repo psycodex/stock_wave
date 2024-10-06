@@ -8,15 +8,11 @@ import 'package:macos_ui/macos_ui.dart';
 import 'package:stock_wave/api/api.pb.dart';
 import 'package:stock_wave/injection.dart';
 import 'package:stock_wave/platform_menus.dart';
+import 'package:stock_wave/screens/home_ui.dart';
+import 'package:stock_wave/screens/search_ui.dart';
 import 'package:stock_wave/services/api_service.dart';
-import 'package:stock_wave/utils/utils.dart';
 import 'package:stock_wave/widgets/bottom_tool_window.dart';
 import 'package:stock_wave/widgets/left_tool_window.dart';
-import 'package:stock_wave/widgets/loading_widget.dart';
-import 'package:stock_wave/widgets/main_content_area.dart';
-import 'package:stock_wave/widgets/right_tool_window.dart';
-import 'package:stock_wave/widgets/side_bar.dart';
-import 'package:stock_wave/widgets/stock_chart.dart';
 import 'package:stock_wave/widgets/top_tool_window.dart';
 
 @RoutePage()
@@ -28,7 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _apiService = locator<ApiService>();
   String indexSymbol = 'NIFTY 50';
   String stockSymbol = '';
   List<KLineEntity>? datas;
@@ -36,6 +31,31 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget childWidget;
+    switch (selectedIndex) {
+      case 0:
+        childWidget = HomeUI(selectedIndex: selectedIndex);
+        break;
+      case 1:
+        childWidget = SearchUi();
+        break;
+      case 2:
+        childWidget = Container();
+        break;
+      case 3:
+        childWidget = Container();
+        break;
+      case 4:
+        childWidget = Container();
+        break;
+      case 5:
+        childWidget = Container();
+        break;
+      default:
+        childWidget = Container();
+        break;
+    }
+    setState(() {});
     return PlatformMenuBar(
       menus: menuBarItems(),
       child: MacosWindow(
@@ -67,25 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   // Main content area
                   Expanded(
-                    child: MainContentArea(
-                      sidebar: SideBar(
-                        defaultWidth: 400,
-                        child: Container(
-                          // color: Colors.blue,
-                          child: getLeftSideBar(),
-                        ),
-                      ),
-                      // endSidebar: SideBar(
-                      //   defaultWidth: 200,
-                      //   child: Container(
-                      //     color: Colors.red,
-                      //     child: const Center(
-                      //       child: Text('End Sidebar'),
-                      //     ),
-                      //   ),
-                      // ),
-                      child: getChart(),
-                    ),
+                    child: childWidget,
                   ),
                   // Right tool window
                   // Container(
@@ -108,101 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget getLeftSideBar() {
-    return Column(
-      children: [
-        // Top ListView
-        Expanded(
-          child: getIndicesStocks(indexSymbol),
-        ),
-        Divider(
-          color: Colors.black,
-        ),
-        // Bottom ListView
-        Expanded(
-          child: getIndices(),
-        ),
-      ],
-    );
-  }
-
-  Widget getIndices() {
-    return FutureBuilder(
-      future: _apiService.listIndices(),
-      builder: (context, AsyncSnapshot<List<Indices>> snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isNotEmpty) {
-            var indices = snapshot.data!;
-            return ListView.builder(
-              itemCount: indices.length,
-              shrinkWrap: true,
-              itemBuilder: (context, i) {
-                var index = indices[i];
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      indexSymbol = index.symbol;
-                    });
-                  },
-                  child: Text(index.symbol),
-                );
-              },
-            );
-          } else {
-            return Container();
-          }
-        } else {
-          return const Scaffold(
-            body: LoadingWidget(),
-          );
-        }
-      },
-    );
-  }
-
-  Widget getIndicesStocks(String symbol) {
-    return FutureBuilder(
-      future: _apiService.listIndicesStocks(symbol),
-      builder: (context, AsyncSnapshot<List<Stocks>> snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.isNotEmpty) {
-            var stocks = snapshot.data!;
-            return ListView.builder(
-              itemCount: stocks.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                var stock = stocks[index];
-                return GestureDetector(
-                  onTap: () async {
-                    stockSymbol = stock.symbol;
-                    var ohlcvs = await _apiService.getStockData(stockSymbol);
-                    setState(() {
-                      datas = convertOhlcvsToKLineEntities(ohlcvs);
-                      DataUtil.calculate(datas!);
-                    });
-                  },
-                  child: Text(stock.symbol),
-                );
-              },
-            );
-          } else {
-            return Container();
-          }
-        } else {
-          return const Scaffold(
-            body: LoadingWidget(),
-          );
-        }
-      },
-    );
-  }
-
-  Widget getChart() {
-    return StockChart(
-      data: datas,
     );
   }
 }
