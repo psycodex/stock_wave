@@ -2,7 +2,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stock_wave/widgets/side_bar.dart';
-import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:macos_ui/macos_ui.dart' as macos;
@@ -75,6 +76,9 @@ class _MainContentAreaState extends State<MainContentArea> {
                 child: AnimatedContainer(
                   duration: duration,
                   curve: curve,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 0.5),
+                  ),
                   constraints: BoxConstraints(
                     minWidth: 0,
                     maxWidth: width - _endSidebarWidth,

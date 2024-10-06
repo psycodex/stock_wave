@@ -14,7 +14,9 @@ import 'package:stock_wave/widgets/bottom_tool_window.dart';
 import 'package:stock_wave/widgets/left_tool_window.dart';
 import 'package:stock_wave/widgets/loading_widget.dart';
 import 'package:stock_wave/widgets/main_content_area.dart';
+import 'package:stock_wave/widgets/right_tool_window.dart';
 import 'package:stock_wave/widgets/side_bar.dart';
+import 'package:stock_wave/widgets/stock_chart.dart';
 import 'package:stock_wave/widgets/top_tool_window.dart';
 
 @RoutePage()
@@ -27,19 +29,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _apiService = locator<ApiService>();
-  String symbol = 'NIFTY 50';
-  String stock = '';
-  ChartStyle chartStyle = ChartStyle();
-  ChartColors chartColors = ChartColors();
+  String indexSymbol = 'NIFTY 50';
+  String stockSymbol = '';
   List<KLineEntity>? datas;
-  final MainState _mainState = MainState.MA;
-  final bool _volHidden = false;
-  final List<SecondaryState> _secondaryStateLi = [SecondaryState.RSI];
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +42,28 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             // Top tool window
-            SizedBox(
+            Container(
               height: 45,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.black, width: 0.5),
+                ),
+              ),
               child: TopToolWindow(),
             ),
             Expanded(
               child: Row(
                 children: [
                   // Left tool window
-                  SizedBox(
-                    width: 30,
-                    child: LeftToolWindow(),
+                  Container(
+                    width: 50,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(color: Colors.black, width: 0.5),
+                        bottom: BorderSide(color: Colors.black, width: 0.5),
+                      ),
+                    ),
+                    child: LeftToolWindow(selectedIndex: selectedIndex),
                   ),
                   // Main content area
                   Expanded(
@@ -92,66 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             // Bottom tool window
-            SizedBox(
+            Container(
               height: 30,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.black, width: 0.5),
+                ),
+              ),
               child: BottomToolWindow(),
             ),
           ],
         ),
-      ),
-    );
-    return Scaffold(
-      body: Column(
-        children: [
-          // Top tool window
-          SizedBox(
-            height: 30,
-            child: TopToolWindow(),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                // Left tool window
-                // SizedBox(
-                //   width: 30,
-                //   child: LeftToolWindow(),
-                // ),
-                // Main content area
-                Expanded(
-                  child: MainContentArea(
-                    sidebar: SideBar(
-                      defaultWidth: 200,
-                      child: Container(
-                        color: Colors.blue,
-                        child: getLeftSideBar(),
-                      ),
-                    ),
-                    // endSidebar: SideBar(
-                    //   defaultWidth: 200,
-                    //   child: Container(
-                    //     color: Colors.red,
-                    //     child: const Center(
-                    //       child: Text('End Sidebar'),
-                    //     ),
-                    //   ),
-                    // ),
-                    child: getChart(),
-                  ),
-                ),
-                // Right tool window
-                // Container(
-                //   width: 30,
-                //   child: RightToolWindow(),
-                // ),
-              ],
-            ),
-          ),
-          // Bottom tool window
-          SizedBox(
-            height: 30,
-            child: BottomToolWindow(),
-          ),
-        ],
       ),
     );
   }
@@ -161,9 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         // Top ListView
         Expanded(
-          child: getIndicesStocks(symbol),
+          child: getIndicesStocks(indexSymbol),
         ),
-        Divider(),
+        Divider(
+          color: Colors.black,
+        ),
         // Bottom ListView
         Expanded(
           child: getIndices(),
@@ -187,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return GestureDetector(
                   onTap: () {
                     setState(() {
-                      symbol = index.symbol;
+                      indexSymbol = index.symbol;
                     });
                   },
                   child: Text(index.symbol),
@@ -220,7 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 var stock = stocks[index];
                 return GestureDetector(
                   onTap: () async {
-                    var ohlcvs = await _apiService.getStockData(stock.symbol);
+                    stockSymbol = stock.symbol;
+                    var ohlcvs = await _apiService.getStockData(stockSymbol);
                     setState(() {
                       datas = convertOhlcvsToKLineEntities(ohlcvs);
                       DataUtil.calculate(datas!);
@@ -243,30 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget getChart() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final height = constraints.maxHeight;
-
-        return Stack(
-          children: [
-            KChartWidget(
-              datas,
-              chartStyle,
-              chartColors,
-              mBaseHeight: height,
-              isTrendLine: false,
-              mainState: _mainState,
-              volHidden: _volHidden,
-              secondaryStateLi: _secondaryStateLi.toSet(),
-              fixedLength: 2,
-              timeFormat: TimeFormat.YEAR_MONTH_DAY,
-              maDayList: [5, 10, 20],
-              showNowPrice: true,
-            )
-          ],
-        );
-      },
+    return StockChart(
+      data: datas,
     );
   }
 }
